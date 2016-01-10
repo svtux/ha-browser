@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Processor debug</title>
+    <style>
+        .input,
+        #input,
+        .button {
+            width: 682px;
+            margin: auto;
+        }
+        .input,
+        #input {
+            height: 300px;
+        }
+        .button {
+            width: 694px;
+            text-align: right;
+            padding: 10px 0 0;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        body {
+            font-size: 63%;
+            line-height: 1.8em;
+        }
+
+        .template {
+            width: 564px;
+            min-height: 362px;
+            margin: auto;
+            padding: 11px 18px;
+            text-align: left;
+            font-size: 1.2em;
+        }
+    </style>
+</head>
+<body>
+    <div class="template hidden" id="wrapper">
+    </div>
+
+    <div class="input"><textarea id="input"></textarea></div>
+    <div class="button"><input type="button" id="parseData" value="Разобрать"></div>
+    <script src="js/sponsor-proc.js"></script>
+</body>
+</html>

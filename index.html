@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru" ng-app="haBrowser">
 <head>
-    <meta charset="UTF-8">
-    <title>Processor debug</title>
-    <link rel="stylesheet" href="css/style.css">
+	<meta charset="UTF-8">
+	<title>Processor debug</title>
+	<link rel="stylesheet" href="css/style.css">
 
 	<script src="lib/angular.js"></script>
 	<script src="lib/angular-route.js"></script>
@@ -11,206 +11,14 @@
 	<script src="lib/i18n/angular-locale_ru.js"></script>
 </head>
 <body>
-    <div class="template" id="wrapper">
-        <table class="stats" width="100%">
-            <tr class='caption'>
-                <th>
-                    <div class="left"><img src="http://www.hockeyarena.net/pics/questionr.png" /></div>
-                    <div class="right"><img src="http://www.hockeyarena.net/pics/questionr.png" /></div>
-                    &nbsp;&nbsp;<span id="element1-1">Donald Bak "A", id 33914483</span>
-                </th>
-            </tr>
-        </table>
-        <table class="stats" width="100%" border='0'>
-            <tbody>
-            <tr class="">
-                <!--<td class="center" colspan='2' style='text-align:left; padding-left: 4px; padding-bottom: 4px;' rowspan='8' ><p><img src='http://www.hockeyarena.net/foto.php?id=%F7%1D%3F%26G%17%3D%A0&x=29_89840_10_17'></p>-->
-                <!--</td>-->
-                <!--<td class="center" rowspan='8' >&nbsp;</td>-->
-                <td class="qb1 qbig"><span id="element2-1">Сумма умений</span></td>
-                <td class="q1 qbig"><span id="element2-2">1</span></td>
-                <td class="center">&nbsp;</td>
-                <td class="qb1 qbig"><span id="element3-1">Отн. СУ</span></td>
-                <td class="q1 qbig">
-                    <!--<a href='index.php?p=public_player_info.inc&player_id=33911861' class='bl'>-->
-                        <span id="element3-2">0%</span>
-                    <!--</a>-->
-                </td>
-            </tr>
-            <tr class="odd">
-                <td class="qb1"><span id="element4-1">Возр.</span></td>
-                <td class="q1"><span id="element4-2">17</span></td>
-                <td class="center">&nbsp;</td>
-                <td class="qb1"><span id="element5-1">Страна</span></td>
-                <td class="q1"><img id="element5-3" src='http://www.hockeyarena.net/pics/nat17.gif' style='vertical-align:middle;'>&nbsp;<span id="element5-2">Дания</span></td>
-            </tr>
-            <tr class="">
-                <td class="qb"><a href='index.php?p=manager_player_contract.php&player_id=33914483' class='bl'><span id="element6-1">Контракт</span></a></td>
-                <td class="q"><a href='index.php?p=manager_player_contract.php&player_id=33914483' class='bl'><span id="element6-2">0 дн.</span></a></td>
-                <td class="center">&nbsp;</td>
-                <td class="qb"><span id="element7-1">Команда</span></td>
-                <td class="q" style='white-space:normal;'><a href='index.php?p=public_team_info_basic.php&team_id=587' class='bl'><span id="element7-2">Динамо</span></a></td>
-            </tr>
-            <tr class="odd">
-                <td class="qb"><span id="element8-1">Травма (дни)</span></td>
-                <td class="q"><span id="element8-2">Здоров</span></td>
-                <td class="center">&nbsp;</td>
-                <td class="qb"><a href='index.php?p=public_player_info.inc&player_id=33914483&f=1' class='bl'><span id="element9-1">Работоспособность</span></a></td>
-                <td class="q"><span id='q'><img id="element9-4" class="hidden" src='http://www.hockeyarena.net/pics/target.gif'><img id="element9-3" class="hidden" src="http://www.hockeyarena.net/pics/question.gif">&nbsp;<span id="element9-2">0%</span></span></td>
-            </tr>
-            <tr class="">
-                <td class="qb"><span id="element10-1">Зарплата</span></td>
-                <td class="q"><span id="element10-2">0</span></td>
-                <td class="center">&nbsp;</td>
-                <td class="qb"><a href='index.php?p=public_player_info.inc&player_id=33914483&f=1' class='bl'><span id="element11-1">Потенциал</span></a></td>
-                <td class="q"><span id='p'><a id="element11-5" href='javascript: void(0)' title=' MAX-2'><img id="element11-4" class="hidden" src='http://www.hockeyarena.net/pics/target.gif'><img id="element11-3" class="hidden" src="http://www.hockeyarena.net/pics/question.gif">&nbsp;<span id="element11-2">0%</span></a></span></td>
-            </tr>
-            <tr class="odd">
-                <td class="qb"><a href='index.php?p=manager_player_satisfaction.inc&player_id=33914483' class='bl'><span id="element12-1">Удовлетворенность</span></a></td>
-                <td class="q"><a href='index.php?p=manager_player_satisfaction.inc&player_id=33914483' class='bl'><span id="element12-2">0%</span></a></td>
-                <td class="center">&nbsp;</td>
-                <td class="qb"><span id="element13-1">Лояльность</span></td>
-                <td class="q"><a href='index.php?p=manager_player_loyalty.inc&player_id=33914483'><img src='http://www.hockeyarena.net/pics/expand.gif' title='Повысить лояльность'></a>&nbsp;&nbsp;<span id="element13-3" class="hidden"><img src="http://www.hockeyarena.net/pics/question.gif">&nbsp;</span><span id="element13-2"></span></td>
-            </tr>
-            <tr class="">
-                <td class="qb"><span id="element14-1" class="hidden">Слабое место</span></td>
-                <td class="q"><span id="element14-2" class="hidden">Нет</span></td>
-                <td class="center">&nbsp;</td>
-                <td class="qb"><span id="element15-1">Звезда</span></td>
-                <td class="q">
-                    <span id="element15-4" class="hidden"><img src='http://www.hockeyarena.net/pics/star.gif'></span><span id="element15-3" class="hidden"><img src="http://www.hockeyarena.net/pics/question.gif">&nbsp;</span><span id="element15-2"></span>
-                </td>
-            </tr>
-            <tr class="odd hidden">
-                <td class="qb"><span id="element16-1">Отн. СУ (лига)</span></td>
-                <td class="q"><a href='index.php?p=public_player_info.inc&player_id=33947916' class='bl'><span id="element16-2">0%</span></a></td>
-                <td class="center">&nbsp;</td>
-                <td class="qb"><span id="element17-1">Затраты</span></td>
-                <td class="q"><span id="element17-2">?</span></td>
-            </tr>
-            </tbody>
-        </table>
+<div ng-view></div>
 
-        <!--<form style='margin:0px;padding:0px;'>-->
-            <table class="stats" width="100%">
-                <tr class='caption'>
-                    <th>
-                        &nbsp;&nbsp;<span id="element18-1">Параметры</span>
-                    </th>
-                </tr>
-            </table>
-            <table class="stats" width="100%" border='0'>
-                <tbody>
-                <tr class="">
-                    <td class="qb"><span id="element19-1">Вратарь</span></td>
-                    <td class="q"><span id="element19-2">0 (0%)</span></td>
-                    <td class="center">&nbsp;</td>
-                    <td class="qb"><span id="element20-1">Скорость</span></td>
-                    <td class="q"><span id="element20-2">0 (0%)</span></td>
-                </tr>
-                <tr class="odd">
-                    <td class="qb"><span id="element21-1">Защита</span></td>
-                    <td class="q"><span id="element21-2">0 (0%)</span></td>
-                    <td class="center">&nbsp;</td>
-                    <td class="qb"><span id="element22-1">Сила</span></td>
-                    <td class="q"><span id="element22-2">0 (0%)</span></td>
-                </tr>
-                <tr class="">
-                    <td class="qb"><span id="element23-1">Нападение</span></td>
-                    <td class="q"><span id="element23-2">0 (0%)</span></td>
-                    <td class="center">&nbsp;</td>
-                    <td class="qb"><span id="element24-1">Самообладание</span></td>
-                    <td class="q"><span id="element24-2">0 (0%)</span></td>
-                </tr>
-                <tr class="odd">
-                    <td class="qb"><span id="element25-1">Бросок</span></td>
-                    <td class="q"><span id="element25-2">0 (0%)</span></td>
-                    <td class="center">&nbsp;</td>
-                    <td class="qb"><span id="element26-1">Форма</span></td>
-                    <td class="q"><span id="element26-2">0 (0)</span></td>
-                </tr>
-                <tr class="">
-                    <td class="qb"><span id="element27-1">Пас</span></td>
-                    <td class="q"><span id="element27-2">0 (0%)</span></td>
-                    <td class="center">&nbsp;</td>
-                    <td class="qb"><span id="element28-1">Опыт</span></td>
-                    <td class="q"><span id="element28-2">0 (0%)</span></td>
-                </tr>
-                <tr class="odd">
-                    <td class="qb"><span id="element29-1">Энергия</span></td>
-                    <td class="q"><span id="element29-2">0</span></td>
-                    <td class="center">&nbsp;</td>
-                    <td class="qb"><span id="element30-1">Тренировки</span></td>
-                    <td class="q"><span id="element30-2">0%</span></td>
-                </tr>
-                <tr class="">
-                    <td class="qb"><span id="element31-1">Тренировочное расписание</span></td>
-                    <td class="q" colspan='4' style='text-align: left;'>
-                        <select name=33914483 class="nice" disabled>
-                            <option value=''>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</option>
-                        </select>
-                    </td>
-                </tr>
-                <tr class="odd hidden">
-                    <td class="qb"><span id="element32-1">Пятерки</span></td>
-                    <td class="q" colspan='2' style='text-align: left;'><a href='javascript: void(0)'><img name='exp' src='http://www.hockeyarena.net/pics/expand.gif'></a>&nbsp;&nbsp;<a href='javascript: void(0)'><span id="element32-2">0-0-0</span></a></td>
-                    <td class="qb" style='text-align: left;'><a id='autoclick' href='javascript: void(0)' class='nib'><span id="element33-1">Автосмена расписаний</span></a></td>
-                    <td class="q"><span id="element33-2"></span></td>
-                </tr>
-                </tbody>
-            </table>
-        <!--</form>-->
+<div class="input"><textarea id="input"></textarea></div>
+<div class="button"><input type="button" id="parseData" value="Разобрать"></div>
 
-        <table class="stats" width="100%">
-            <tr class='caption'>
-                <th>
-                    &nbsp;&nbsp;<span id="element34-1">Статистика</span>
-                </th>
-            </tr>
-        </table>
-        <table class="stats" width="100%" border='0'>
-            <tbody>
-            <tr class="">
-                <td class="qb"><span id="element35-1">Голы</span></td>
-                <td class="q"><span id="element35-2">0</span></td>
-                <td class="center">&nbsp;</td>
-                <td class="qb"><span id="element36-1">Передачи</span></td>
-                <td class="q"><span id="element36-2">0</span></td>
-            </tr>
-            <tr class="odd">
-                <td class="qb"><span id="element37-1">Броски</span></td>
-                <td class="q"><span id="element37-2">0</span></td>
-                <td class="center">&nbsp;</td>
-                <td class="qb"><span id="element38-1">Матчи</span></td>
-                <td class="q"><span id="element38-2">0</span></td>
-            </tr>
-            <tr class="">
-                <td class="qb"><span id="element39-1">Результативность бросков</span></td>
-                <td class="q"><span id="element39-2">0%</span></td>
-                <td class="center">&nbsp;</td>
-                <td class="qb"><span id="element40-1">Время на льду (минуты)</span></td>
-                <td class="q"><span id="element40-2">0</span></td>
-            </tr>
-            <tr class="odd">
-                <td class="qb"><span id="element41-1">Штрафные минуты</span></td>
-                <td class="q"><span id="element41-2">0</span></td>
-                <td class="center">&nbsp;</td>
-                <td class="qb"><span id="element42-1">+/-</span></td>
-                <td class="q"><span id="element42-2">0</span></td>
-            </tr>
-            <tr class="">
-                <td class="qb"><span id="element43-1">Оценка</span></td>
-                <td class="q"><span id="element43-2">0.0</span></td>
-                <td class="center">&nbsp;</td>
-                <td class="qb"><span id="element44-1">Недель в команде (дней)</span></td>
-                <td class="q"><span id="element44-2">0 (0)</span></td>
-            </tr>
-            </tbody>
-        </table>
-    </div>
-
-    <div class="input"><textarea id="input"></textarea></div>
-    <div class="button"><input type="button" id="parseData" value="Разобрать"></div>
-    <script src="js/processor.js"></script>
+<script src="js/app.js"></script>
+<script src="js/router.js"></script>
+<script src="js/datastore.factory.js"></script>
+<script src="js/players.controller.js"></script>
 </body>
 </html>

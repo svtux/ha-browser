@@ -30,7 +30,7 @@ angular.module("haBrowser")
 					element = tmpList[j].trim().split("\t");
 					for (var k = 0; k < element.length; k++) {
 						if (element[k]) {
-							console.log(n, element[k].trim());
+							// console.log(n, element[k].trim());
 							value = element[k].trim();
 							if (n == 13 && k == 1) { // лояльность
 								loyal = /([+-]\d)|([+-])$/.exec(value);

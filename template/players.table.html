@@ -2,8 +2,8 @@
 	<table class="stats" width="100%">
 		<tr class='caption'>
 			<th>
-				<div class="left"><img src="http://www.hockeyarena.net/pics/questionr.png"/></div>
-				<div class="right"><img src="http://www.hockeyarena.net/pics/questionr.png"/></div>
+				<div class="left"><div class="question-img"></div></div>
+				<div class="right"><div class="question-img"></div></div>
 				&nbsp;&nbsp;<span id="element1-1">Donald Bak "A", id 33914483</span>
 			</th>
 		</tr>
@@ -29,8 +29,7 @@
 			<td class="q1"><span id="element4-2">17</span></td>
 			<td class="center">&nbsp;</td>
 			<td class="qb1"><span id="element5-1">Страна</span></td>
-			<td class="q1"><img id="element5-3" src='http://www.hockeyarena.net/pics/nat17.gif'
-			                    style='vertical-align:middle;'>&nbsp;<span id="element5-2">Дания</span></td>
+			<td class="q1"><div id="element5-3" class="flag denmark-flag"></div>&nbsp;<span id="element5-2">Дания</span></td>
 		</tr>
 		<tr class="">
 			<td class="qb"><a href='index.php?p=manager_player_contract.php&player_id=33914483' class='bl'><span
@@ -48,10 +47,8 @@
 			<td class="center">&nbsp;</td>
 			<td class="qb"><a href='index.php?p=public_player_info.inc&player_id=33914483&f=1' class='bl'><span
 					id="element9-1">Работоспособность</span></a></td>
-			<td class="q"><span id='q'><img id="element9-4" class="hidden"
-			                                src='http://www.hockeyarena.net/pics/target.gif'><img id="element9-3"
-			                                                                                      class="hidden"
-			                                                                                      src="http://www.hockeyarena.net/pics/question.gif">&nbsp;<span
+			<td class="q"><span id='q'><div id="element9-4" ng-hide="true" class="target-img"></div>
+				<div id="element9-3" ng-hide="true" class="question2-img"></div>&nbsp;<span
 					id="element9-2">0%</span></span></td>
 		</tr>
 		<tr class="">
@@ -60,9 +57,9 @@
 			<td class="center">&nbsp;</td>
 			<td class="qb"><a href='index.php?p=public_player_info.inc&player_id=33914483&f=1' class='bl'><span
 					id="element11-1">Потенциал</span></a></td>
-			<td class="q"><span id='p'><a id="element11-5" href='javascript: void(0)' title=' MAX-2'><img
-					id="element11-4" class="hidden" src='http://www.hockeyarena.net/pics/target.gif'><img
-					id="element11-3" class="hidden" src="http://www.hockeyarena.net/pics/question.gif">&nbsp;<span
+			<td class="q"><span id='p'><a id="element11-5" href='javascript: void(0)' title=' MAX-2'>
+				<div id="element11-4" ng-hide="true" class="target-img"></div>
+				<div id="element11-3" ng-hide="true" class="question2-img"></div>&nbsp;<span
 					id="element11-2">0%</span></a></span></td>
 		</tr>
 		<tr class="odd">
@@ -72,10 +69,9 @@
 					id="element12-2">0%</span></a></td>
 			<td class="center">&nbsp;</td>
 			<td class="qb"><span id="element13-1">Лояльность</span></td>
-			<td class="q"><a href='index.php?p=manager_player_loyalty.inc&player_id=33914483'><img
-					src='http://www.hockeyarena.net/pics/expand.gif' title='Повысить лояльность'></a>&nbsp;&nbsp;<span
-					id="element13-3" class="hidden"><img
-					src="http://www.hockeyarena.net/pics/question.gif">&nbsp;</span><span id="element13-2"></span></td>
+			<td class="q"><a href='index.php?p=manager_player_loyalty.inc&player_id=33914483'><div class="expand-img" title='Повысить лояльность'></div></a>&nbsp;&nbsp;<span
+					id="element13-3" class="hidden">
+				<div ng-hide="true" class="question2-img"></div>&nbsp;</span><span id="element13-2"></span></td>
 		</tr>
 		<tr class="">
 			<td class="qb"><span id="element14-1" class="hidden">Слабое место</span></td>
@@ -83,9 +79,9 @@
 			<td class="center">&nbsp;</td>
 			<td class="qb"><span id="element15-1">Звезда</span></td>
 			<td class="q">
-				<span id="element15-4" class="hidden"><img src='http://www.hockeyarena.net/pics/star.gif'></span><span
-					id="element15-3" class="hidden"><img
-					src="http://www.hockeyarena.net/pics/question.gif">&nbsp;</span><span id="element15-2"></span>
+				<span id="element15-4" class="hidden"><div class="star-img"></div></span><span
+					id="element15-3" class="hidden">
+				<div ng-hide="true" class="question2-img"></div>&nbsp;</span><span id="element15-2"></span>
 			</td>
 		</tr>
 		<tr class="odd hidden">
@@ -161,8 +157,7 @@
 		</tr>
 		<tr class="odd hidden">
 			<td class="qb"><span id="element32-1">Пятерки</span></td>
-			<td class="q" colspan='2' style='text-align: left;'><a href='javascript: void(0)'><img name='exp'
-			                                                                                       src='http://www.hockeyarena.net/pics/expand.gif'></a>&nbsp;&nbsp;<a
+			<td class="q" colspan='2' style='text-align: left;'><a href='javascript: void(0)'><div class="expand-img"></div></a>&nbsp;&nbsp;<a
 					href='javascript: void(0)'><span id="element32-2">0-0-0</span></a></td>
 			<td class="qb" style='text-align: left;'><a id='autoclick' href='javascript: void(0)' class='nib'><span
 					id="element33-1">Автосмена расписаний</span></a></td>

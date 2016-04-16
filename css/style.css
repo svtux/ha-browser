@@ -1,0 +1,137 @@
+body {
+	background: #7BA6C1;
+}
+
+.input,
+#input,
+.button {
+	width: 562px;
+	margin: auto;
+}
+.input,
+#input {
+	height: 300px;
+}
+.button {
+	width: 564px;
+	text-align: right;
+	padding: 10px 0 0;
+}
+
+.hidden {
+	display: none;
+}
+
+
+/* HockeyArena.net style */
+body {
+	font-size: 63%;
+	line-height: 1.8em;
+}
+
+.template {
+	width: 564px;
+	min-height: 362px;
+	margin: auto;
+	padding: 11px 18px;
+	text-align: left;
+	font-size: 1.2em;
+}
+
+body, input, textarea, select, button {
+	font-family: sans-serif, Verdana, Helvetica,sans;
+}
+body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, code, form, fieldset, legend, input, button, textarea, p, blockquote, th, td {
+	margin: 0;
+	padding: 0;
+}
+img {
+	border: 0;
+}
+a {
+	color: #1154B1;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+table.stats tr.caption {
+	background: #4A9CD0;
+	font-weight: bold;
+	color: #FFFFFF;
+	font-size: 1.1em;
+	border-bottom: 1px solid #125A9A;
+	text-transform: uppercase;
+}
+table.stats tr.caption div {
+	color: #FFFFFF;
+}
+.left, img.left {
+	float: left;
+}
+.right, img.right {
+	float: right;
+}
+table.stats tr.caption img {
+	vertical-align: top;
+}
+table.stats tr.caption td, table.stats tr.caption th {
+	padding: 3px 5px 2px 5px;
+	text-align: left;
+}
+table.stats td, table.stats th {
+	padding: 0 2px;
+	border-bottom: 1px dotted #ccc;
+	white-space: nowrap;
+	font-size: 95%;
+}
+table.stats td img {
+	vertical-align: middle;
+}
+
+th.center, td.center {
+	text-align: center;
+}
+table.stats tr.odd td, table.stats tr.odd th {
+	background: #DAEBF5;
+	border-bottom: 1px dotted #ACB8C1;
+}
+table.stats td.qb {
+	width: 24%;
+	text-align: left;
+	font-weight: bold;
+	padding: 0 0 0 5px;
+}
+table.stats td.q {
+	width: 24%;
+	text-align: right;
+}
+table.stats td.qb1 {
+	width: 15%;
+	text-align: left;
+	font-weight: bold;
+	padding: 0 0 0 5px;
+}
+table.stats td.q1 {
+	width: 15%;
+	text-align: right;
+}
+table.stats td.qbig {
+	height: 24px;
+	font-size: 14px;
+	color: black;
+	font-weight: bold;
+	vertical-align: bottom;
+	padding-bottom: 1px;
+}
+table.stats a.bl {
+	color: #11548E;
+	font-weight: bold;
+}
+table.stats a {
+	color: #000;
+}
+table.stats td {
+	font-size: 0.9em;
+}

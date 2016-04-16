@@ -1,4 +1,4 @@
-<div class="template" id="wrapper">
+<div player-table class="player-table">
 	<table class="stats" width="100%">
 		<tr class='caption'>
 			<th>
@@ -218,4 +218,11 @@
 		</tr>
 		</tbody>
 	</table>
+</div>
+<div class="input">
+	<textarea input-player-data class="input" ng-model="plCtrl.inputData"></textarea>
+</div>
+<div class="button">
+	<button btn-change-data ng-hide="true">Изменить</button>
+	<button btn-update-data ng-click="plCtrl.parseInputData()">Обновить</button>
 </div>

@@ -3,13 +3,11 @@ body {
 }
 
 .input,
-#input,
 .button {
 	width: 562px;
 	margin: auto;
 }
-.input,
-#input {
+.input {
 	height: 300px;
 }
 .button {
@@ -29,13 +27,14 @@ body {
 	line-height: 1.8em;
 }
 
-.template {
+.player-table {
 	width: 564px;
 	min-height: 362px;
 	margin: auto;
 	padding: 11px 18px;
 	text-align: left;
 	font-size: 1.2em;
+	background: #fff;
 }
 
 body, input, textarea, select, button {

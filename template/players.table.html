@@ -4,7 +4,7 @@
 			<th>
 				<div class="left"><div class="question-img"></div></div>
 				<div class="right"><div class="question-img"></div></div>
-				&nbsp;&nbsp;<span id="element1-1">Donald Bak "A", id 33914483</span>
+				&nbsp;&nbsp;<span ng-bind="plCtrl.playerData.item1[1] || 'Donald Bak, id 33914483'"></span>
 			</th>
 		</tr>
 	</table>
@@ -14,83 +14,83 @@
 			<!--<td class="center" colspan='2' style='text-align:left; padding-left: 4px; padding-bottom: 4px;' rowspan='8' ><p><img src='http://www.hockeyarena.net/foto.php?id=%F7%1D%3F%26G%17%3D%A0&x=29_89840_10_17'></p>-->
 			<!--</td>-->
 			<!--<td class="center" rowspan='8' >&nbsp;</td>-->
-			<td class="qb1 qbig"><span id="element2-1">Сумма умений</span></td>
-			<td class="q1 qbig"><span id="element2-2">1</span></td>
+			<td class="qb1 qbig"><span ng-bind="plCtrl.playerData.item2[1] || 'Сумма умений'"></span></td>
+			<td class="q1 qbig"><span ng-bind="plCtrl.playerData.item2[2] || '1'"></span></td>
 			<td class="center">&nbsp;</td>
-			<td class="qb1 qbig"><span id="element3-1">Отн. СУ</span></td>
+			<td class="qb1 qbig"><span ng-bind="plCtrl.playerData.item3[1] || 'Отн. СУ'"></span></td>
 			<td class="q1 qbig">
 				<!--<a href='index.php?p=public_player_info.inc&player_id=33911861' class='bl'>-->
-				<span id="element3-2">0%</span>
+				<span ng-bind="plCtrl.playerData.item3[2] || '0%'"></span>
 				<!--</a>-->
 			</td>
 		</tr>
 		<tr class="odd">
-			<td class="qb1"><span id="element4-1">Возр.</span></td>
-			<td class="q1"><span id="element4-2">17</span></td>
+			<td class="qb1"><span ng-bind="plCtrl.playerData.item4[1] || 'Возр.'"></span></td>
+			<td class="q1"><span ng-bind="plCtrl.playerData.item4[2] || '17'"></span></td>
 			<td class="center">&nbsp;</td>
-			<td class="qb1"><span id="element5-1">Страна</span></td>
-			<td class="q1"><div id="element5-3" class="flag denmark-flag"></div>&nbsp;<span id="element5-2">Дания</span></td>
+			<td class="qb1"><span ng-bind="plCtrl.playerData.item5[1] || 'Страна'"></span></td>
+			<td class="q1"><div ng-class="(plCtrl.playerData.item5[3] || 'denmark') + '-flag'" class="flag"></div>&nbsp;<span ng-bind="plCtrl.playerData.item5[2] || 'Дания'"></span></td>
 		</tr>
 		<tr class="">
 			<td class="qb"><a href='index.php?p=manager_player_contract.php&player_id=33914483' class='bl'><span
-					id="element6-1">Контракт</span></a></td>
+					ng-bind="plCtrl.playerData.item6[1] || 'Контракт'"></span></a></td>
 			<td class="q"><a href='index.php?p=manager_player_contract.php&player_id=33914483' class='bl'><span
-					id="element6-2">0 дн.</span></a></td>
+					ng-bind="plCtrl.playerData.item6[2] || '0 дн.'"></span></a></td>
 			<td class="center">&nbsp;</td>
-			<td class="qb"><span id="element7-1">Команда</span></td>
+			<td class="qb"><span ng-bind="plCtrl.playerData.item7[1] || 'Команда'"></span></td>
 			<td class="q" style='white-space:normal;'><a href='index.php?p=public_team_info_basic.php&team_id=587'
-			                                             class='bl'><span id="element7-2">Динамо</span></a></td>
+			                                             class='bl'><span ng-bind="plCtrl.playerData.item7[2] || 'Динамо'"></span></a></td>
 		</tr>
 		<tr class="odd">
-			<td class="qb"><span id="element8-1">Травма (дни)</span></td>
-			<td class="q"><span id="element8-2">Здоров</span></td>
+			<td class="qb"><span ng-bind="plCtrl.playerData.item8[1] || 'Травма (дни)'"></span></td>
+			<td class="q"><span ng-bind="plCtrl.playerData.item8[2] || 'Здоров'"></span></td>
 			<td class="center">&nbsp;</td>
 			<td class="qb"><a href='index.php?p=public_player_info.inc&player_id=33914483&f=1' class='bl'><span
-					id="element9-1">Работоспособность</span></a></td>
-			<td class="q"><span id='q'><div id="element9-4" ng-hide="true" class="target-img"></div>
-				<div id="element9-3" ng-hide="true" class="question2-img"></div>&nbsp;<span
-					id="element9-2">0%</span></span></td>
+					ng-bind="plCtrl.playerData.item9[1] || 'Работоспособность'"></span></a></td>
+			<td class="q"><span id='q'><div ng-show="plCtrl.playerData.item9[4]" class="target-img"></div>
+				<div ng-show="plCtrl.playerData.item9[3]" class="question2-img"></div>&nbsp;<span
+						ng-bind="plCtrl.playerData.item9[2] || '0%'"></span></span></td>
 		</tr>
 		<tr class="">
-			<td class="qb"><span id="element10-1">Зарплата</span></td>
-			<td class="q"><span id="element10-2">0</span></td>
+			<td class="qb"><span ng-bind="plCtrl.playerData.item10[1] || 'Зарплата'"></span></td>
+			<td class="q"><span ng-bind="plCtrl.playerData.item10[2] || '0'"></span></td>
 			<td class="center">&nbsp;</td>
 			<td class="qb"><a href='index.php?p=public_player_info.inc&player_id=33914483&f=1' class='bl'><span
-					id="element11-1">Потенциал</span></a></td>
-			<td class="q"><span id='p'><a id="element11-5" href='javascript: void(0)' title=' MAX-2'>
-				<div id="element11-4" ng-hide="true" class="target-img"></div>
-				<div id="element11-3" ng-hide="true" class="question2-img"></div>&nbsp;<span
-					id="element11-2">0%</span></a></span></td>
+					ng-bind="plCtrl.playerData.item11[1] || 'Потенциал'"></span></a></td>
+			<td class="q"><span id='p'><a href='javascript: void(0)' title=' MAX-2'>
+				<div ng-show="plCtrl.playerData.item11[4]" class="target-img"></div>
+				<div ng-show="plCtrl.playerData.item11[3]" class="question2-img"></div>&nbsp;<span
+					ng-bind="plCtrl.playerData.item11[2] || '0%'"></span></a></span></td>
 		</tr>
 		<tr class="odd">
 			<td class="qb"><a href='index.php?p=manager_player_satisfaction.inc&player_id=33914483' class='bl'><span
-					id="element12-1">Удовлетворенность</span></a></td>
+					ng-bind="plCtrl.playerData.item12[1] || 'Удовлетворенность'"></span></a></td>
 			<td class="q"><a href='index.php?p=manager_player_satisfaction.inc&player_id=33914483' class='bl'><span
-					id="element12-2">0%</span></a></td>
+					ng-bind="plCtrl.playerData.item12[2] || '0%'"></span></a></td>
 			<td class="center">&nbsp;</td>
-			<td class="qb"><span id="element13-1">Лояльность</span></td>
-			<td class="q"><a href='index.php?p=manager_player_loyalty.inc&player_id=33914483'><div class="expand-img" title='Повысить лояльность'></div></a>&nbsp;&nbsp;<span
-					id="element13-3" class="hidden">
-				<div ng-hide="true" class="question2-img"></div>&nbsp;</span><span id="element13-2"></span></td>
+			<td class="qb"><span ng-bind="plCtrl.playerData.item13[1] || 'Лояльность'"></span></td>
+			<td class="q"><a href='index.php?p=manager_player_loyalty.inc&player_id=33914483'><div class="expand-img" title='Повысить лояльность'></div></a>
+				&nbsp;&nbsp;<span ng-show="plCtrl.playerData.item13[3]">
+				<div class="question2-img"></div>&nbsp;</span><span ng-bind="plCtrl.playerData.item13[2]"></span></td>
 		</tr>
 		<tr class="">
-			<td class="qb"><span id="element14-1" class="hidden">Слабое место</span></td>
-			<td class="q"><span id="element14-2" class="hidden">Нет</span></td>
+			<td class="qb"><span ng-bind="plCtrl.playerData.item14[1]" ng-hide="true">Слабое место</span></td>
+			<td class="q"><span ng-bind="plCtrl.playerData.item14[2]" ng-hide="true">Нет</span></td>
 			<td class="center">&nbsp;</td>
-			<td class="qb"><span id="element15-1">Звезда</span></td>
+			<td class="qb"><span ng-bind="plCtrl.playerData.item15[1] || 'Звезда'"></span></td>
 			<td class="q">
-				<span id="element15-4" class="hidden"><div class="star-img"></div></span><span
-					id="element15-3" class="hidden">
-				<div ng-hide="true" class="question2-img"></div>&nbsp;</span><span id="element15-2"></span>
+				<span ng-show="plCtrl.playerData.item15[4]"><div class="star-img"></div></span>
+				<span ng-show="plCtrl.playerData.item15[3]"><div class="question2-img"></div>&nbsp;</span>
+				<span ng-bind="plCtrl.playerData.item15[2]"></span>
 			</td>
 		</tr>
-		<tr class="odd hidden">
-			<td class="qb"><span id="element16-1">Отн. СУ (лига)</span></td>
+		<tr class="odd ng-hide">
+			<td class="qb"><span ng-bind="plCtrl.playerData.item16[1] || 'Отн. СУ (лига)'"></span></td>
 			<td class="q"><a href='index.php?p=public_player_info.inc&player_id=33947916' class='bl'><span
-					id="element16-2">0%</span></a></td>
+					ng-bind="plCtrl.playerData.item16[2] || '0%'"></span></a></td>
 			<td class="center">&nbsp;</td>
-			<td class="qb"><span id="element17-1">Затраты</span></td>
-			<td class="q"><span id="element17-2">?</span></td>
+			<td class="qb"><span ng-bind="plCtrl.playerData.item17[1] || 'Затраты'"></span></td>
+			<td class="q"><span ng-bind="plCtrl.playerData.item17[2] || '?'"></span></td>
 		</tr>
 		</tbody>
 	</table>
@@ -99,69 +99,69 @@
 	<table class="stats" width="100%">
 		<tr class='caption'>
 			<th>
-				&nbsp;&nbsp;<span id="element18-1">Параметры</span>
+				&nbsp;&nbsp;<span ng-bind="plCtrl.playerData.item18[1] || 'Параметры'"></span>
 			</th>
 		</tr>
 	</table>
 	<table class="stats" width="100%" border='0'>
 		<tbody>
 		<tr class="">
-			<td class="qb"><span id="element19-1">Вратарь</span></td>
-			<td class="q"><span id="element19-2">0 (0%)</span></td>
+			<td class="qb"><span ng-bind="plCtrl.playerData.item19[1] || 'Вратарь'"></span></td>
+			<td class="q"><span ng-bind="plCtrl.playerData.item19[2] || '0 (0%)'"></span></td>
 			<td class="center">&nbsp;</td>
-			<td class="qb"><span id="element20-1">Скорость</span></td>
-			<td class="q"><span id="element20-2">0 (0%)</span></td>
+			<td class="qb"><span ng-bind="plCtrl.playerData.item20[1] || 'Скорость'"></span></td>
+			<td class="q"><span ng-bind="plCtrl.playerData.item20[2] || '0 (0%)'"></span></td>
 		</tr>
 		<tr class="odd">
-			<td class="qb"><span id="element21-1">Защита</span></td>
-			<td class="q"><span id="element21-2">0 (0%)</span></td>
+			<td class="qb"><span ng-bind="plCtrl.playerData.item21[1] || 'Защита'"></span></td>
+			<td class="q"><span ng-bind="plCtrl.playerData.item21[2] || '0 (0%)'"></span></td>
 			<td class="center">&nbsp;</td>
-			<td class="qb"><span id="element22-1">Сила</span></td>
-			<td class="q"><span id="element22-2">0 (0%)</span></td>
+			<td class="qb"><span ng-bind="plCtrl.playerData.item22[1] || 'Сила'"></span></td>
+			<td class="q"><span ng-bind="plCtrl.playerData.item22[2] || '0 (0%)'"></span></td>
 		</tr>
 		<tr class="">
-			<td class="qb"><span id="element23-1">Нападение</span></td>
-			<td class="q"><span id="element23-2">0 (0%)</span></td>
+			<td class="qb"><span ng-bind="plCtrl.playerData.item23[1] || 'Нападение'"></span></td>
+			<td class="q"><span ng-bind="plCtrl.playerData.item23[2] || '0 (0%)'"></span></td>
 			<td class="center">&nbsp;</td>
-			<td class="qb"><span id="element24-1">Самообладание</span></td>
-			<td class="q"><span id="element24-2">0 (0%)</span></td>
+			<td class="qb"><span ng-bind="plCtrl.playerData.item24[1] || 'Самообладание'"></span></td>
+			<td class="q"><span ng-bind="plCtrl.playerData.item24[2] || '0 (0%)'"></span></td>
 		</tr>
 		<tr class="odd">
-			<td class="qb"><span id="element25-1">Бросок</span></td>
-			<td class="q"><span id="element25-2">0 (0%)</span></td>
+			<td class="qb"><span ng-bind="plCtrl.playerData.item25[1] || 'Бросок'"></span></td>
+			<td class="q"><span ng-bind="plCtrl.playerData.item25[2] || '0 (0%)'"></span></td>
 			<td class="center">&nbsp;</td>
-			<td class="qb"><span id="element26-1">Форма</span></td>
-			<td class="q"><span id="element26-2">0 (0)</span></td>
+			<td class="qb"><span ng-bind="plCtrl.playerData.item26[1] || 'Форма'"></span></td>
+			<td class="q"><span ng-bind="plCtrl.playerData.item26[2] || '0 (0)'"></span></td>
 		</tr>
 		<tr class="">
-			<td class="qb"><span id="element27-1">Пас</span></td>
-			<td class="q"><span id="element27-2">0 (0%)</span></td>
+			<td class="qb"><span ng-bind="plCtrl.playerData.item27[1] || 'Пас'"></span></td>
+			<td class="q"><span ng-bind="plCtrl.playerData.item27[2] || '0 (0%)'"></span></td>
 			<td class="center">&nbsp;</td>
-			<td class="qb"><span id="element28-1">Опыт</span></td>
-			<td class="q"><span id="element28-2">0 (0%)</span></td>
+			<td class="qb"><span ng-bind="plCtrl.playerData.item28[1] || 'Опыт'"></span></td>
+			<td class="q"><span ng-bind="plCtrl.playerData.item28[2] || '0 (0%)'"></span></td>
 		</tr>
 		<tr class="odd">
-			<td class="qb"><span id="element29-1">Энергия</span></td>
-			<td class="q"><span id="element29-2">0</span></td>
+			<td class="qb"><span ng-bind="plCtrl.playerData.item29[1] || 'Энергия'"></span></td>
+			<td class="q"><span ng-bind="plCtrl.playerData.item29[2] || '0'"></span></td>
 			<td class="center">&nbsp;</td>
-			<td class="qb"><span id="element30-1">Тренировки</span></td>
-			<td class="q"><span id="element30-2">0%</span></td>
+			<td class="qb"><span ng-bind="plCtrl.playerData.item30[1] || 'Тренировки'"></span></td>
+			<td class="q"><span ng-bind="plCtrl.playerData.item30[2] || '0%'"></span></td>
 		</tr>
 		<tr class="">
-			<td class="qb"><span id="element31-1">Тренировочное расписание</span></td>
+			<td class="qb"><span ng-bind="plCtrl.playerData.item31[1] || 'Тренировочное расписание'"></span></td>
 			<td class="q" colspan='4' style='text-align: left;'>
 				<select name=33914483 class="nice" disabled>
 					<option value=''>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</option>
 				</select>
 			</td>
 		</tr>
-		<tr class="odd hidden">
-			<td class="qb"><span id="element32-1">Пятерки</span></td>
+		<tr class="odd ng-hide">
+			<td class="qb"><span>Пятерки</span></td>
 			<td class="q" colspan='2' style='text-align: left;'><a href='javascript: void(0)'><div class="expand-img"></div></a>&nbsp;&nbsp;<a
-					href='javascript: void(0)'><span id="element32-2">0-0-0</span></a></td>
-			<td class="qb" style='text-align: left;'><a id='autoclick' href='javascript: void(0)' class='nib'><span
-					id="element33-1">Автосмена расписаний</span></a></td>
-			<td class="q"><span id="element33-2"></span></td>
+					href='javascript: void(0)'><span>0-0-0</span></a></td>
+			<td class="qb" style='text-align: left;'><a id='autoclick' href='javascript: void(0)' class='nib'>
+				<span>Автосмена расписаний</span></a></td>
+			<td class="q"><span></span></td>
 		</tr>
 		</tbody>
 	</table>
@@ -170,46 +170,46 @@
 	<table class="stats" width="100%">
 		<tr class='caption'>
 			<th>
-				&nbsp;&nbsp;<span id="element34-1">Статистика</span>
+				&nbsp;&nbsp;<span ng-bind="plCtrl.playerData.item34[1] || 'Статистика'"></span>
 			</th>
 		</tr>
 	</table>
 	<table class="stats" width="100%" border='0'>
 		<tbody>
 		<tr class="">
-			<td class="qb"><span id="element35-1">Голы</span></td>
-			<td class="q"><span id="element35-2">0</span></td>
+			<td class="qb"><span ng-bind="plCtrl.playerData.item35[1] || 'Голы'"></span></td>
+			<td class="q"><span ng-bind="plCtrl.playerData.item35[2] || '0'"></span></td>
 			<td class="center">&nbsp;</td>
-			<td class="qb"><span id="element36-1">Передачи</span></td>
-			<td class="q"><span id="element36-2">0</span></td>
+			<td class="qb"><span ng-bind="plCtrl.playerData.item36[1] || 'Передачи'"></span></td>
+			<td class="q"><span ng-bind="plCtrl.playerData.item36[2] || '0'"></span></td>
 		</tr>
 		<tr class="odd">
-			<td class="qb"><span id="element37-1">Броски</span></td>
-			<td class="q"><span id="element37-2">0</span></td>
+			<td class="qb"><span ng-bind="plCtrl.playerData.item37[1] || 'Броски'"></span></td>
+			<td class="q"><span ng-bind="plCtrl.playerData.item37[2] || '0'"></span></td>
 			<td class="center">&nbsp;</td>
-			<td class="qb"><span id="element38-1">Матчи</span></td>
-			<td class="q"><span id="element38-2">0</span></td>
+			<td class="qb"><span ng-bind="plCtrl.playerData.item38[1] || 'Матчи'"></span></td>
+			<td class="q"><span ng-bind="plCtrl.playerData.item38[2] || '0'"></span></td>
 		</tr>
 		<tr class="">
-			<td class="qb"><span id="element39-1">Результативность бросков</span></td>
-			<td class="q"><span id="element39-2">0%</span></td>
+			<td class="qb"><span ng-bind="plCtrl.playerData.item39[1] || 'Результативность бросков'"></span></td>
+			<td class="q"><span ng-bind="plCtrl.playerData.item39[2] || '0%'"></span></td>
 			<td class="center">&nbsp;</td>
-			<td class="qb"><span id="element40-1">Время на льду (минуты)</span></td>
-			<td class="q"><span id="element40-2">0</span></td>
+			<td class="qb"><span ng-bind="plCtrl.playerData.item40[1] || 'Время на льду (минуты)'"></span></td>
+			<td class="q"><span ng-bind="plCtrl.playerData.item40[2] || '0'"></span></td>
 		</tr>
 		<tr class="odd">
-			<td class="qb"><span id="element41-1">Штрафные минуты</span></td>
-			<td class="q"><span id="element41-2">0</span></td>
+			<td class="qb"><span ng-bind="plCtrl.playerData.item41[1] || 'Штрафные минуты'"></span></td>
+			<td class="q"><span ng-bind="plCtrl.playerData.item41[2] || '0'"></span></td>
 			<td class="center">&nbsp;</td>
-			<td class="qb"><span id="element42-1">+/-</span></td>
-			<td class="q"><span id="element42-2">0</span></td>
+			<td class="qb"><span ng-bind="plCtrl.playerData.item42[1] || '+/-'"></span></td>
+			<td class="q"><span ng-bind="plCtrl.playerData.item42[2] || '0'"></span></td>
 		</tr>
 		<tr class="">
-			<td class="qb"><span id="element43-1">Оценка</span></td>
-			<td class="q"><span id="element43-2">0.0</span></td>
+			<td class="qb"><span ng-bind="plCtrl.playerData.item43[1] || 'Оценка'"></span></td>
+			<td class="q"><span ng-bind="plCtrl.playerData.item43[2] || '0.0'"></span></td>
 			<td class="center">&nbsp;</td>
-			<td class="qb"><span id="element44-1">Недель в команде (дней)</span></td>
-			<td class="q"><span id="element44-2">0 (0)</span></td>
+			<td class="qb"><span ng-bind="plCtrl.playerData.item44[1] || 'Недель в команде (дней)'"></span></td>
+			<td class="q"><span ng-bind="plCtrl.playerData.item44[2] || '0 (0)'"></span></td>
 		</tr>
 		</tbody>
 	</table>

@@ -27,7 +27,8 @@ body {
 	width: 564px;
 	min-height: 362px;
 	margin: auto;
-	padding: 11px 18px;
+	/*padding: 11px 18px;*/
+	padding: 3px;
 	text-align: left;
 	font-size: 1.2em;
 	background: #fff;

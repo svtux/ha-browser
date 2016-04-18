@@ -20,6 +20,7 @@
 				<div class="left"><div class="question-img"></div></div>
 				<div class="right"><div class="question-img"></div></div>
 				&nbsp;&nbsp;<span ng-bind="plCtrl.playerData.name.value + ', id ' + plCtrl.playerData.name.id"></span>
+				<span ng-show="plCtrl.minimized" ng-bind="'[' + (plCtrl.playerData.loyalty.value || '?') + ']'"></span>
 			</th>
 		</tr>
 	</table>

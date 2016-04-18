@@ -6,11 +6,10 @@
 
 angular.module("haBrowser")
 	.controller("PlayersController", function(DataStore, $locale) {
-		this.playerData = {
-			//default values
+		var defaultData = {
 			"name": {title: "", value: "Player Name", id: 1234567},
 			"skillsSum": {title: "Сумма умений", value: 1},
-			"relativeSkillsSum": {title: "Отн. СУ", value: 0},
+			"relativeSkillsSum": {title: "Отн. СУ", value: 0, id: 0},
 			"age": {title: "Возр.", value: 17},
 			"country": {title: "Страна", value: "", code: ""},
 			"contract": {title: "Контракт", value: 0},
@@ -51,7 +50,6 @@ angular.module("haBrowser")
 			"rating": {title: "Оценка", value: "0.0"},
 			"weeksInTeam": {title: "Недель в команде (дней)", value: "0 (0)"}
 		};
-
 		var rexMap = {
 			"name": "(.*),\\sID\\s(\\d+)",
 			"skillsSum": "(Сумма\\sумений)\\s(\\d+)",
@@ -96,9 +94,10 @@ angular.module("haBrowser")
 			"rating": "(Оценка)\\s+(\\d+\\.\\d+)",
 			"weeksInTeam": "(Недель\\sв\\sкоманде\\s\\(дней\\))\\s+(\\d+\\s\\(\\d+\\))"
 		};
-
 		var potentialList = [106, 100, 94, 88, 82, 76, 71, 65, 59, 53, 47, 41, 35, 29, 24, 18, 12, 6, 0];
 
+		this.inputData = "";
+		this.playerData = angular.copy(defaultData);
 		this.dataMap = {
 			0: "name",
 			2: "skillsSum",
@@ -144,15 +143,19 @@ angular.module("haBrowser")
 			42: "weeksInTeam"
 		};
 
-		var delimiter = "\n";
-		var player1 = " DONALD BAK \"A\", ID 33914483;; 	Сумма умений	371	 	Отн. СУ	67%;Возр.	29	 	Страна	 Дания;Контракт	20 дн.	 	Команда	Омские Следопыты;Травма (дни)	Здоров	 	Работоспособность	 90%;Зарплата	229 379	 	Потенциал	 12%;Удовлетворенность	100%	 	Лояльность	Повысить лояльность  -2; 	Звезда	;Отн. СУ (лига)	93%	 	Затраты	?;  ПАРАМЕТРЫ;Вратарь	0 (0%)	 	Скорость	32 (39%);Защита	157 (68%)	 	Сила	71 (4%);Нападение	4 (74%)	 	Самообладание	25 (88%);Бросок	25 (6%)	 	Форма	55 (-5);Пас	57 (61%)	 	Опыт	265 (30%);Энергия	100	 	Тренировки	10%;Тренировочное расписание	;Пятерки	  2-1-2	Автосмена расписаний	;  СТАТИСТИКА;Голы	3	 	Передачи	35;Броски	55	 	Матчи	37;Результативность бросков	5.5%	 	Время на льду (минуты)	728;Штрафные минуты	14	 	+/-	52;Оценка	4.6	 	Недель в команде (дней)	119 (834)";
+		this.minimized = true;
+		this.changed = false;
 
-		this.inputData = player1.split(";").join("\n");
+		var delimiter = "\n";
+		// var player1 = " DONALD BAK \"A\", ID 33914483;; 	Сумма умений	371	 	Отн. СУ	67%;Возр.	29	 	Страна	 Дания;Контракт	20 дн.	 	Команда	Омские Следопыты;Травма (дни)	Здоров	 	Работоспособность	 90%;Зарплата	229 379	 	Потенциал	 12%;Удовлетворенность	100%	 	Лояльность	Повысить лояльность  -2; 	Звезда	;Отн. СУ (лига)	93%	 	Затраты	?;  ПАРАМЕТРЫ;Вратарь	0 (0%)	 	Скорость	32 (39%);Защита	157 (68%)	 	Сила	71 (4%);Нападение	4 (74%)	 	Самообладание	25 (88%);Бросок	25 (6%)	 	Форма	55 (-5);Пас	57 (61%)	 	Опыт	265 (30%);Энергия	100	 	Тренировки	10%;Тренировочное расписание	;Пятерки	  2-1-2	Автосмена расписаний	;  СТАТИСТИКА;Голы	3	 	Передачи	35;Броски	55	 	Матчи	37;Результативность бросков	5.5%	 	Время на льду (минуты)	728;Штрафные минуты	14	 	+/-	52;Оценка	4.6	 	Недель в команде (дней)	119 (834)";
+		// this.inputData = player1.split(";").join("\n");
 
 		//var player_proc = player1.replace(/\s/g," ").replace(/\s+/g," ").replace(/([0-9%)\sа-я])(?=[А-Я])(.)/g, "$1;$2");
 		//player1.replace(/\s/g," ").replace(/\s+/g," ").replace(/([0-9%)])(?=[^0-9.%)\s])(.)/g, "$1;$2");
 
 		this.parseInputData = function() {
+			this.playerData = angular.copy(defaultData);
+
 			var list = this.inputData.split(delimiter);
 
 			for (var i = 0, n = 0; i < list.length; i++, n++) {
@@ -226,10 +229,27 @@ angular.module("haBrowser")
 				for (var j = i; j < potentialList.length; j++) {
 					if (potentialList[j] == this.playerData.potential.value) {
 						var diff = i - j;
-						this.playerData.potential.tips = tip + (diff > 0 ? "-" + diff: "");
+						this.playerData.potential.tips = tip + (diff || "");
 						break;
 					}
 				}
 			}
+		};
+		
+		this.savePlayerData = function() {
+			this.changed = false;
+			console.log(JSON.stringify(this.playerData));
+		};
+
+		this.openInputField = function() {
+			this.changed = true;
+		};
+
+		this.fold = function() {
+			this.minimized = true;
+		};
+
+		this.unfold = function() {
+			this.minimized = false;
 		};
 	});

@@ -1,4 +1,19 @@
 <div player-table class="player-table">
+	<div class="button">
+		<a btn-change-data ng-href="javascript: void(0)"
+		   ng-hide="!plCtrl.minimized"
+		   ng-click="plCtrl.unfold()">Развернуть</a>
+		<a btn-update-data ng-href="javascript: void(0)"
+		   ng-hide="plCtrl.minimized"
+		   ng-click="plCtrl.fold()">Свернуть</a>
+		<a btn-change-data ng-href="javascript: void(0)"
+		   ng-hide="plCtrl.changed"
+		   ng-click="plCtrl.openInputField()">Изменить</a>
+		<a btn-update-data ng-href="javascript: void(0)"
+		   ng-hide="!plCtrl.changed"
+		   ng-click="plCtrl.savePlayerData()">Сохранить</a>
+	</div>
+
 	<table class="stats" width="100%">
 		<tr class='caption'>
 			<th>
@@ -8,217 +23,216 @@
 			</th>
 		</tr>
 	</table>
-	<table class="stats" width="100%" border='0'>
-		<tbody>
-		<tr class="">
-			<!--<td class="center" colspan='2' style='text-align:left; padding-left: 4px; padding-bottom: 4px;' rowspan='8' ><p><img src='http://www.hockeyarena.net/foto.php?id=%F7%1D%3F%26G%17%3D%A0&x=29_89840_10_17'></p>-->
-			<!--</td>-->
-			<!--<td class="center" rowspan='8' >&nbsp;</td>-->
-			<td class="qb1 qbig"><span ng-bind="plCtrl.playerData.skillsSum.title"></span></td>
-			<td class="q1 qbig"><span ng-bind="plCtrl.playerData.skillsSum.value"></span></td>
-			<td class="center">&nbsp;</td>
-			<td class="qb1 qbig"><span ng-bind="plCtrl.playerData.relativeSkillsSum.title"></span></td>
-			<td class="q1 qbig">
-				<!--<a href='index.php?p=public_player_info.inc&player_id=33911861' class='bl'>-->
-				<span ng-bind="plCtrl.playerData.relativeSkillsSum.value + '%'"></span>
-				<!--</a>-->
-			</td>
-		</tr>
-		<tr class="odd">
-			<td class="qb1"><span ng-bind="plCtrl.playerData.age.title"></span></td>
-			<td class="q1"><span ng-bind="plCtrl.playerData.age.value"></span></td>
-			<td class="center">&nbsp;</td>
-			<td class="qb1"><span ng-bind="plCtrl.playerData.country.title"></span></td>
-			<td class="q1"><div ng-class="plCtrl.playerData.country.code + '-flag'" class="flag"></div>&nbsp;<span ng-bind="plCtrl.playerData.country.value"></span></td>
-		</tr>
-		<tr class="">
-			<td class="qb"><a href='index.php?p=manager_player_contract.php&player_id=33914483' class='bl'><span
-					ng-bind="plCtrl.playerData.contract.title"></span></a></td>
-			<td class="q"><a href='index.php?p=manager_player_contract.php&player_id=33914483' class='bl'><span
-					ng-bind="plCtrl.playerData.contract.value + ' дн.'"></span></a></td>
-			<td class="center">&nbsp;</td>
-			<td class="qb"><span ng-bind="plCtrl.playerData.team.title"></span></td>
-			<td class="q" style='white-space:normal;'>
-				<a href='index.php?p=public_team_info_basic.php&team_id=587'
-                    class='bl'><span ng-bind="plCtrl.playerData.team.value"></span></a></td>
-		</tr>
-		<tr class="odd">
-			<td class="qb"><span ng-bind="plCtrl.playerData.injury.title"></span></td>
-			<td class="q"><span ng-bind="plCtrl.playerData.injury.value"></span></td>
-			<td class="center">&nbsp;</td>
-			<td class="qb"><a href='index.php?p=public_player_info.inc&player_id=33914483&f=1' class='bl'><span
-					ng-bind="plCtrl.playerData.quality.title"></span></a></td>
-			<td class="q"><span id='q'>
-				<div ng-show="plCtrl.playerData.quality.investigated" class="target-img"></div>
-				<div ng-show="plCtrl.playerData.quality.unknown" class="question2-img"></div>
-				&nbsp;<span ng-bind="plCtrl.playerData.quality.value + '%'"></span></span></td>
-		</tr>
-		<tr class="">
-			<td class="qb"><span ng-bind="plCtrl.playerData.salary.title"></span></td>
-			<td class="q"><span ng-bind="plCtrl.playerData.salary.value"></span></td>
-			<td class="center">&nbsp;</td>
-			<td class="qb"><a href='index.php?p=public_player_info.inc&player_id=33914483&f=1' class='bl'><span
-					ng-bind="plCtrl.playerData.potential.title"></span></a></td>
-			<td class="q"><span id='p'><a href='javascript: void(0)' title='{{plCtrl.playerData.potential.tips}}'>
-				<div ng-show="plCtrl.playerData.potential.investigated" class="target-img"></div>
-				<div ng-show="plCtrl.playerData.potential.unknown" class="question2-img"></div>
-				&nbsp;<span ng-bind="plCtrl.playerData.potential.value + '%'"></span></a></span></td>
-		</tr>
-		<tr class="odd">
-			<td class="qb"><a href='index.php?p=manager_player_satisfaction.inc&player_id=33914483' class='bl'><span
-					ng-bind="plCtrl.playerData.satisfaction.title"></span></a></td>
-			<td class="q"><a href='index.php?p=manager_player_satisfaction.inc&player_id=33914483' class='bl'><span
-					ng-bind="plCtrl.playerData.satisfaction.value + '%'"></span></a></td>
-			<td class="center">&nbsp;</td>
-			<td class="qb"><span ng-bind="plCtrl.playerData.loyalty.title"></span></td>
-			<td class="q"><a href='index.php?p=manager_player_loyalty.inc&player_id=33914483'><div class="expand-img" title='Повысить лояльность'></div></a>&nbsp;&nbsp;<span ng-show="plCtrl.playerData.loyalty.unknown">
-				<div class="question2-img"></div>&nbsp;</span><span ng-bind="plCtrl.playerData.loyalty.value"></span></td>
-		</tr>
-		<tr class="">
-			<td class="qb"><span ng-bind="plCtrl.playerData.goalieWeakSpot.title" ng-show="plCtrl.playerData.goalieWeakSpot.unknown"></span></td>
-			<td class="q"><span ng-bind="plCtrl.playerData.goalieWeakSpot.value" ng-show="plCtrl.playerData.goalieWeakSpot.unknown"></span></td>
-			<td class="center">&nbsp;</td>
-			<td class="qb"><span ng-bind="plCtrl.playerData.star.title"></span></td>
-			<td class="q">
-				<span ng-show="plCtrl.playerData.star.number"><div class="star-img"></div></span>
-				<span ng-show="plCtrl.playerData.star.unknown"><div class="question2-img"></div>&nbsp;</span>
-				<span ng-bind="plCtrl.playerData.star.value + '%'"></span>
-			</td>
-		</tr>
-		<tr class="odd ng-hide">
-			<td class="qb"><span ng-bind="plCtrl.playerData.relativeSkillsSumLeague.title"></span></td>
-			<td class="q"><a href='index.php?p=public_player_info.inc&player_id=33947916' class='bl'><span
-					ng-bind="plCtrl.playerData.relativeSkillsSumLeague.value + '%'"></span></a></td>
-			<td class="center">&nbsp;</td>
-			<td class="qb"><span ng-bind="plCtrl.playerData.cost.title"></span></td>
-			<td class="q"><span ng-bind="plCtrl.playerData.cost.value"></span></td>
-		</tr>
-		</tbody>
-	</table>
 
-	<!--<form style='margin:0px;padding:0px;'>-->
-	<table class="stats" width="100%">
-		<tr class='caption'>
-			<th>
-				&nbsp;&nbsp;<span ng-bind="plCtrl.playerData.attributes.title"></span>
-			</th>
-		</tr>
-	</table>
-	<table class="stats" width="100%" border='0'>
-		<tbody>
-		<tr class="">
-			<td class="qb"><span ng-bind="plCtrl.playerData.goalie.title"></span></td>
-			<td class="q"><span ng-bind="plCtrl.playerData.goalie.value"></span></td>
-			<td class="center">&nbsp;</td>
-			<td class="qb"><span ng-bind="plCtrl.playerData.speed.title"></span></td>
-			<td class="q"><span ng-bind="plCtrl.playerData.speed.value"></span></td>
-		</tr>
-		<tr class="odd">
-			<td class="qb"><span ng-bind="plCtrl.playerData.defense.title"></span></td>
-			<td class="q"><span ng-bind="plCtrl.playerData.defense.value"></span></td>
-			<td class="center">&nbsp;</td>
-			<td class="qb"><span ng-bind="plCtrl.playerData.strength.title"></span></td>
-			<td class="q"><span ng-bind="plCtrl.playerData.strength.value"></span></td>
-		</tr>
-		<tr class="">
-			<td class="qb"><span ng-bind="plCtrl.playerData.offense.title"></span></td>
-			<td class="q"><span ng-bind="plCtrl.playerData.offense.value"></span></td>
-			<td class="center">&nbsp;</td>
-			<td class="qb"><span ng-bind="plCtrl.playerData.selfControl.title"></span></td>
-			<td class="q"><span ng-bind="plCtrl.playerData.selfControl.value"></span></td>
-		</tr>
-		<tr class="odd">
-			<td class="qb"><span ng-bind="plCtrl.playerData.shooting.title"></span></td>
-			<td class="q"><span ng-bind="plCtrl.playerData.shooting.value"></span></td>
-			<td class="center">&nbsp;</td>
-			<td class="qb"><span ng-bind="plCtrl.playerData.form.title"></span></td>
-			<td class="q"><span ng-bind="plCtrl.playerData.form.value"></span></td>
-		</tr>
-		<tr class="">
-			<td class="qb"><span ng-bind="plCtrl.playerData.passing.title"></span></td>
-			<td class="q"><span ng-bind="plCtrl.playerData.passing.value"></span></td>
-			<td class="center">&nbsp;</td>
-			<td class="qb"><span ng-bind="plCtrl.playerData.experience.title"></span></td>
-			<td class="q"><span ng-bind="plCtrl.playerData.experience.value"></span></td>
-		</tr>
-		<tr class="odd">
-			<td class="qb"><span ng-bind="plCtrl.playerData.energy.title"></span></td>
-			<td class="q"><span ng-bind="plCtrl.playerData.energy.value"></span></td>
-			<td class="center">&nbsp;</td>
-			<td class="qb"><span ng-bind="plCtrl.playerData.training.title"></span></td>
-			<td class="q"><span ng-bind="plCtrl.playerData.training.value + '%'"></span></td>
-		</tr>
-		<tr class="ng-hide">
-			<td class="qb"><span ng-bind="plCtrl.playerData.trainingSchedule.title"></span></td>
-			<td class="q" colspan='4' style='text-align: left;'>
-				<select name=33914483 class="nice" disabled>
-					<option value=''>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</option>
-				</select>
-			</td>
-		</tr>
-		<tr class="odd ng-hide">
-			<td class="qb"><span>Пятерки</span></td>
-			<td class="q" colspan='2' style='text-align: left;'><a href='javascript: void(0)'><div class="expand-img"></div></a>&nbsp;&nbsp;<a
-					href='javascript: void(0)'><span>0-0-0</span></a></td>
-			<td class="qb" style='text-align: left;'><a id='autoclick' href='javascript: void(0)' class='nib'>
-				<span>Автосмена расписаний</span></a></td>
-			<td class="q"><span></span></td>
-		</tr>
-		</tbody>
-	</table>
-	<!--</form>-->
+	<div ng-hide="plCtrl.minimized">
+		<table class="stats" width="100%" border='0'>
+			<tbody>
+			<tr class="">
+				<!--<td class="center" colspan='2' style='text-align:left; padding-left: 4px; padding-bottom: 4px;' rowspan='8' ><p><img src='http://www.hockeyarena.net/foto.php?id=%F7%1D%3F%26G%17%3D%A0&x=29_89840_10_17'></p>-->
+				<!--</td>-->
+				<!--<td class="center" rowspan='8' >&nbsp;</td>-->
+				<td class="qb1 qbig"><span ng-bind="plCtrl.playerData.skillsSum.title"></span></td>
+				<td class="q1 qbig"><span ng-bind="plCtrl.playerData.skillsSum.value"></span></td>
+				<td class="center">&nbsp;</td>
+				<td class="qb1 qbig"><span ng-bind="plCtrl.playerData.relativeSkillsSum.title"></span></td>
+				<td class="q1 qbig">
+					<!--<a href='index.php?p=public_player_info.inc&player_id={{plCtrl.playerData.relativeSkillsSum.id}}' class='bl'>-->
+					<span ng-bind="plCtrl.playerData.relativeSkillsSum.value + '%'"></span>
+					<!--</a>-->
+				</td>
+			</tr>
+			<tr class="odd">
+				<td class="qb1"><span ng-bind="plCtrl.playerData.age.title"></span></td>
+				<td class="q1"><span ng-bind="plCtrl.playerData.age.value"></span></td>
+				<td class="center">&nbsp;</td>
+				<td class="qb1"><span ng-bind="plCtrl.playerData.country.title"></span></td>
+				<td class="q1"><div ng-class="plCtrl.playerData.country.code + '-flag'" class="flag"></div>&nbsp;<span ng-bind="plCtrl.playerData.country.value"></span></td>
+			</tr>
+			<tr class="">
+				<td class="qb"><a ng-href='index.php?p=manager_player_contract.php&player_id={{plCtrl.playerData.name.id}}' class='bl'><span
+						ng-bind="plCtrl.playerData.contract.title"></span></a></td>
+				<td class="q"><a ng-href='index.php?p=manager_player_contract.php&player_id={{plCtrl.playerData.name.id}}' class='bl'><span
+						ng-bind="plCtrl.playerData.contract.value + ' дн.'"></span></a></td>
+				<td class="center">&nbsp;</td>
+				<td class="qb"><span ng-bind="plCtrl.playerData.team.title"></span></td>
+				<td class="q" style='white-space:normal;'>
+					<a href='index.php?p=public_team_info_basic.php&team_id=587'
+	                    class='bl'><span ng-bind="plCtrl.playerData.team.value"></span></a></td>
+			</tr>
+			<tr class="odd">
+				<td class="qb"><span ng-bind="plCtrl.playerData.injury.title"></span></td>
+				<td class="q"><span ng-bind="plCtrl.playerData.injury.value"></span></td>
+				<td class="center">&nbsp;</td>
+				<td class="qb"><a ng-href='index.php?p=public_player_info.inc&player_id={{plCtrl.playerData.name.id}}&f=1' class='bl'><span
+						ng-bind="plCtrl.playerData.quality.title"></span></a></td>
+				<td class="q"><span id='q'>
+					<div ng-show="plCtrl.playerData.quality.investigated" class="target-img"></div>
+					<div ng-show="plCtrl.playerData.quality.unknown" class="question2-img"></div>
+					&nbsp;<span ng-bind="plCtrl.playerData.quality.value + '%'"></span></span></td>
+			</tr>
+			<tr class="">
+				<td class="qb"><span ng-bind="plCtrl.playerData.salary.title"></span></td>
+				<td class="q"><span ng-bind="plCtrl.playerData.salary.value"></span></td>
+				<td class="center">&nbsp;</td>
+				<td class="qb"><a ng-href='index.php?p=public_player_info.inc&player_id={{plCtrl.playerData.name.id}}&f=1' class='bl'><span
+						ng-bind="plCtrl.playerData.potential.title"></span></a></td>
+				<td class="q"><span id='p'><a href='javascript: void(0)' title='{{plCtrl.playerData.potential.tips}}'>
+					<div ng-show="plCtrl.playerData.potential.investigated" class="target-img"></div>
+					<div ng-show="plCtrl.playerData.potential.unknown" class="question2-img"></div>
+					&nbsp;<span ng-bind="plCtrl.playerData.potential.value + '%'"></span></a></span></td>
+			</tr>
+			<tr class="odd">
+				<td class="qb"><a ng-href='index.php?p=manager_player_satisfaction.inc&player_id={{plCtrl.playerData.name.id}}' class='bl'><span
+						ng-bind="plCtrl.playerData.satisfaction.title"></span></a></td>
+				<td class="q"><a ng-href='index.php?p=manager_player_satisfaction.inc&player_id={{plCtrl.playerData.name.id}}' class='bl'><span
+						ng-bind="plCtrl.playerData.satisfaction.value + '%'"></span></a></td>
+				<td class="center">&nbsp;</td>
+				<td class="qb"><span ng-bind="plCtrl.playerData.loyalty.title"></span></td>
+				<td class="q"><a ng-href='index.php?p=manager_player_loyalty.inc&player_id={{plCtrl.playerData.name.id}}'><div class="expand-img" title='Повысить лояльность'></div></a>&nbsp;&nbsp;<span ng-show="plCtrl.playerData.loyalty.unknown">
+					<div class="question2-img"></div>&nbsp;</span><span ng-bind="plCtrl.playerData.loyalty.value"></span></td>
+			</tr>
+			<tr class="">
+				<td class="qb"><span ng-bind="plCtrl.playerData.goalieWeakSpot.title" ng-show="plCtrl.playerData.goalieWeakSpot.unknown"></span></td>
+				<td class="q"><span ng-bind="plCtrl.playerData.goalieWeakSpot.value" ng-show="plCtrl.playerData.goalieWeakSpot.unknown"></span></td>
+				<td class="center">&nbsp;</td>
+				<td class="qb"><span ng-bind="plCtrl.playerData.star.title"></span></td>
+				<td class="q">
+					<span ng-show="plCtrl.playerData.star.number"><div class="star-img"></div></span>
+					<span ng-show="plCtrl.playerData.star.unknown"><div class="question2-img"></div>&nbsp;</span>
+					<span ng-bind="plCtrl.playerData.star.value + '%'"></span>
+				</td>
+			</tr>
+			<tr class="odd ng-hide">
+				<td class="qb"><span ng-bind="plCtrl.playerData.relativeSkillsSumLeague.title"></span></td>
+				<td class="q"><a href='index.php?p=public_player_info.inc&player_id=33947916' class='bl'><span
+						ng-bind="plCtrl.playerData.relativeSkillsSumLeague.value + '%'"></span></a></td>
+				<td class="center">&nbsp;</td>
+				<td class="qb"><span ng-bind="plCtrl.playerData.cost.title"></span></td>
+				<td class="q"><span ng-bind="plCtrl.playerData.cost.value"></span></td>
+			</tr>
+			</tbody>
+		</table>
 
-	<table class="stats" width="100%">
-		<tr class='caption'>
-			<th>
-				&nbsp;&nbsp;<span ng-bind="plCtrl.playerData.statistics.title"></span>
-			</th>
-		</tr>
-	</table>
-	<table class="stats" width="100%" border='0'>
-		<tbody>
-		<tr class="">
-			<td class="qb"><span ng-bind="plCtrl.playerData.goals.title"></span></td>
-			<td class="q"><span ng-bind="plCtrl.playerData.goals.value"></span></td>
-			<td class="center">&nbsp;</td>
-			<td class="qb"><span ng-bind="plCtrl.playerData.assists.title"></span></td>
-			<td class="q"><span ng-bind="plCtrl.playerData.assists.value"></span></td>
-		</tr>
-		<tr class="odd">
-			<td class="qb"><span ng-bind="plCtrl.playerData.shots.title"></span></td>
-			<td class="q"><span ng-bind="plCtrl.playerData.shots.value"></span></td>
-			<td class="center">&nbsp;</td>
-			<td class="qb"><span ng-bind="plCtrl.playerData.games.title"></span></td>
-			<td class="q"><span ng-bind="plCtrl.playerData.games.value"></span></td>
-		</tr>
-		<tr class="">
-			<td class="qb"><span ng-bind="plCtrl.playerData.shootingPercentage.title"></span></td>
-			<td class="q"><span ng-bind="plCtrl.playerData.shootingPercentage.value + '%'"></span></td>
-			<td class="center">&nbsp;</td>
-			<td class="qb"><span ng-bind="plCtrl.playerData.timeOnIce.title"></span></td>
-			<td class="q"><span ng-bind="plCtrl.playerData.timeOnIce.value"></span></td>
-		</tr>
-		<tr class="odd">
-			<td class="qb"><span ng-bind="plCtrl.playerData.penalties.title"></span></td>
-			<td class="q"><span ng-bind="plCtrl.playerData.penalties.value"></span></td>
-			<td class="center">&nbsp;</td>
-			<td class="qb"><span ng-bind="plCtrl.playerData.plus_minus.title"></span></td>
-			<td class="q"><span ng-bind="plCtrl.playerData.plus_minus.value"></span></td>
-		</tr>
-		<tr class="">
-			<td class="qb"><span ng-bind="plCtrl.playerData.rating.title"></span></td>
-			<td class="q"><span ng-bind="plCtrl.playerData.rating.value"></span></td>
-			<td class="center">&nbsp;</td>
-			<td class="qb"><span ng-bind="plCtrl.playerData.weeksInTeam.title"></span></td>
-			<td class="q"><span ng-bind="plCtrl.playerData.weeksInTeam.value"></span></td>
-		</tr>
-		</tbody>
-	</table>
+		<!--<form style='margin:0px;padding:0px;'>-->
+		<table class="stats" width="100%">
+			<tr class='caption'>
+				<th>
+					&nbsp;&nbsp;<span ng-bind="plCtrl.playerData.attributes.title"></span>
+				</th>
+			</tr>
+		</table>
+		<table class="stats" width="100%" border='0'>
+			<tbody>
+			<tr class="">
+				<td class="qb"><span ng-bind="plCtrl.playerData.goalie.title"></span></td>
+				<td class="q"><span ng-bind="plCtrl.playerData.goalie.value"></span></td>
+				<td class="center">&nbsp;</td>
+				<td class="qb"><span ng-bind="plCtrl.playerData.speed.title"></span></td>
+				<td class="q"><span ng-bind="plCtrl.playerData.speed.value"></span></td>
+			</tr>
+			<tr class="odd">
+				<td class="qb"><span ng-bind="plCtrl.playerData.defense.title"></span></td>
+				<td class="q"><span ng-bind="plCtrl.playerData.defense.value"></span></td>
+				<td class="center">&nbsp;</td>
+				<td class="qb"><span ng-bind="plCtrl.playerData.strength.title"></span></td>
+				<td class="q"><span ng-bind="plCtrl.playerData.strength.value"></span></td>
+			</tr>
+			<tr class="">
+				<td class="qb"><span ng-bind="plCtrl.playerData.offense.title"></span></td>
+				<td class="q"><span ng-bind="plCtrl.playerData.offense.value"></span></td>
+				<td class="center">&nbsp;</td>
+				<td class="qb"><span ng-bind="plCtrl.playerData.selfControl.title"></span></td>
+				<td class="q"><span ng-bind="plCtrl.playerData.selfControl.value"></span></td>
+			</tr>
+			<tr class="odd">
+				<td class="qb"><span ng-bind="plCtrl.playerData.shooting.title"></span></td>
+				<td class="q"><span ng-bind="plCtrl.playerData.shooting.value"></span></td>
+				<td class="center">&nbsp;</td>
+				<td class="qb"><span ng-bind="plCtrl.playerData.form.title"></span></td>
+				<td class="q"><span ng-bind="plCtrl.playerData.form.value"></span></td>
+			</tr>
+			<tr class="">
+				<td class="qb"><span ng-bind="plCtrl.playerData.passing.title"></span></td>
+				<td class="q"><span ng-bind="plCtrl.playerData.passing.value"></span></td>
+				<td class="center">&nbsp;</td>
+				<td class="qb"><span ng-bind="plCtrl.playerData.experience.title"></span></td>
+				<td class="q"><span ng-bind="plCtrl.playerData.experience.value"></span></td>
+			</tr>
+			<tr class="odd">
+				<td class="qb"><span ng-bind="plCtrl.playerData.energy.title"></span></td>
+				<td class="q"><span ng-bind="plCtrl.playerData.energy.value"></span></td>
+				<td class="center">&nbsp;</td>
+				<td class="qb"><span ng-bind="plCtrl.playerData.training.title"></span></td>
+				<td class="q"><span ng-bind="plCtrl.playerData.training.value + '%'"></span></td>
+			</tr>
+			<tr class="ng-hide">
+				<td class="qb"><span ng-bind="plCtrl.playerData.trainingSchedule.title"></span></td>
+				<td class="q" colspan='4' style='text-align: left;'>
+					<select name="{{plCtrl.playerData.name.id}}" class="nice" disabled>
+						<option value=''>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</option>
+					</select>
+				</td>
+			</tr>
+			<tr class="odd ng-hide">
+				<td class="qb"><span>Пятерки</span></td>
+				<td class="q" colspan='2' style='text-align: left;'><a href='javascript: void(0)'><div class="expand-img"></div></a>&nbsp;&nbsp;<a
+						href='javascript: void(0)'><span>0-0-0</span></a></td>
+				<td class="qb" style='text-align: left;'><a id='autoclick' href='javascript: void(0)' class='nib'>
+					<span>Автосмена расписаний</span></a></td>
+				<td class="q"><span></span></td>
+			</tr>
+			</tbody>
+		</table>
+		<!--</form>-->
+
+		<table class="stats" width="100%">
+			<tr class='caption'>
+				<th>
+					&nbsp;&nbsp;<span ng-bind="plCtrl.playerData.statistics.title"></span>
+				</th>
+			</tr>
+		</table>
+		<table class="stats" width="100%" border='0'>
+			<tbody>
+			<tr class="">
+				<td class="qb"><span ng-bind="plCtrl.playerData.goals.title"></span></td>
+				<td class="q"><span ng-bind="plCtrl.playerData.goals.value"></span></td>
+				<td class="center">&nbsp;</td>
+				<td class="qb"><span ng-bind="plCtrl.playerData.assists.title"></span></td>
+				<td class="q"><span ng-bind="plCtrl.playerData.assists.value"></span></td>
+			</tr>
+			<tr class="odd">
+				<td class="qb"><span ng-bind="plCtrl.playerData.shots.title"></span></td>
+				<td class="q"><span ng-bind="plCtrl.playerData.shots.value"></span></td>
+				<td class="center">&nbsp;</td>
+				<td class="qb"><span ng-bind="plCtrl.playerData.games.title"></span></td>
+				<td class="q"><span ng-bind="plCtrl.playerData.games.value"></span></td>
+			</tr>
+			<tr class="">
+				<td class="qb"><span ng-bind="plCtrl.playerData.shootingPercentage.title"></span></td>
+				<td class="q"><span ng-bind="plCtrl.playerData.shootingPercentage.value + '%'"></span></td>
+				<td class="center">&nbsp;</td>
+				<td class="qb"><span ng-bind="plCtrl.playerData.timeOnIce.title"></span></td>
+				<td class="q"><span ng-bind="plCtrl.playerData.timeOnIce.value"></span></td>
+			</tr>
+			<tr class="odd">
+				<td class="qb"><span ng-bind="plCtrl.playerData.penalties.title"></span></td>
+				<td class="q"><span ng-bind="plCtrl.playerData.penalties.value"></span></td>
+				<td class="center">&nbsp;</td>
+				<td class="qb"><span ng-bind="plCtrl.playerData.plus_minus.title"></span></td>
+				<td class="q"><span ng-bind="plCtrl.playerData.plus_minus.value"></span></td>
+			</tr>
+			<tr class="">
+				<td class="qb"><span ng-bind="plCtrl.playerData.rating.title"></span></td>
+				<td class="q"><span ng-bind="plCtrl.playerData.rating.value"></span></td>
+				<td class="center">&nbsp;</td>
+				<td class="qb"><span ng-bind="plCtrl.playerData.weeksInTeam.title"></span></td>
+				<td class="q"><span ng-bind="plCtrl.playerData.weeksInTeam.value"></span></td>
+			</tr>
+			</tbody>
+		</table>
+	</div>
 </div>
-<div class="input">
-	<textarea input-player-data class="input" ng-model="plCtrl.inputData"></textarea>
-</div>
-<div class="button">
-	<button btn-change-data ng-hide="true">Изменить</button>
-	<button btn-update-data ng-click="plCtrl.parseInputData()">Обновить</button>
+<div class="input" ng-show="plCtrl.changed">
+	<textarea input-player-data ng-model="plCtrl.inputData" ng-change="plCtrl.parseInputData()"></textarea>
 </div>

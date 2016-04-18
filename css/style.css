@@ -2,18 +2,28 @@ body {
 	background: #7BA6C1;
 }
 
-.input,
-.button {
-	width: 562px;
-	margin: auto;
-}
 .input {
+	width: 564px;
+	height: 302px;
+	margin: auto;
+	padding: 3px;
+	background: #fff;
+}
+
+.input > textarea {
+	width: 562px;
 	height: 300px;
 }
+
 .button {
-	width: 564px;
-	text-align: right;
-	padding: 10px 0 0;
+	position: absolute;
+	top: 5px;
+	right: 25px;
+}
+
+.button a {
+	color: #fff;
+	padding: 0 5px;
 }
 
 
@@ -24,8 +34,9 @@ body {
 }
 
 .player-table {
+	position: relative;
 	width: 564px;
-	min-height: 362px;
+	/*min-height: 362px;*/
 	margin: auto;
 	/*padding: 11px 18px;*/
 	padding: 3px;

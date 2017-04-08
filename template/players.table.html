@@ -37,7 +37,7 @@
 				<td class="center">&nbsp;</td>
 				<td class="qb1 qbig"><span ng-bind="plCtrl.playerData.relativeSkillsSum.title"></span></td>
 				<td class="q1 qbig">
-					<!--<a href='index.php?p=public_player_info.inc&player_id={{plCtrl.playerData.relativeSkillsSum.id}}' class='bl'>-->
+					<!--<a href='http://www.hockeyarena.net/{{plCtrl.lang}}/index.php?p=public_player_info.inc&player_id={{plCtrl.playerData.relativeSkillsSum.id}}' class='bl'>-->
 					<span ng-bind="plCtrl.playerData.relativeSkillsSum.value + '%'"></span>
 					<!--</a>-->
 				</td>
@@ -50,21 +50,21 @@
 				<td class="q1"><div ng-class="plCtrl.playerData.country.code + '-flag'" class="flag"></div>&nbsp;<span ng-bind="plCtrl.playerData.country.value"></span></td>
 			</tr>
 			<tr class="">
-				<td class="qb"><a ng-href='index.php?p=manager_player_contract.php&player_id={{plCtrl.playerData.name.id}}' class='bl'><span
+				<td class="qb"><a ng-href='http://www.hockeyarena.net/{{plCtrl.lang}}/index.php?p=manager_player_contract.php&player_id={{plCtrl.playerData.name.id}}' class='bl'><span
 						ng-bind="plCtrl.playerData.contract.title"></span></a></td>
-				<td class="q"><a ng-href='index.php?p=manager_player_contract.php&player_id={{plCtrl.playerData.name.id}}' class='bl'><span
+				<td class="q"><a ng-href='http://www.hockeyarena.net/{{plCtrl.lang}}/index.php?p=manager_player_contract.php&player_id={{plCtrl.playerData.name.id}}' class='bl'><span
 						ng-bind="plCtrl.playerData.contract.value + ' дн.'"></span></a></td>
 				<td class="center">&nbsp;</td>
 				<td class="qb"><span ng-bind="plCtrl.playerData.team.title"></span></td>
 				<td class="q" style='white-space:normal;'>
-					<a href='index.php?p=public_team_info_basic.php&team_id=587'
+					<a href='http://www.hockeyarena.net/{{plCtrl.lang}}/index.php?p=public_team_info_basic.php&team_id={{plCtrl.playerData.team.id}}'
 	                    class='bl'><span ng-bind="plCtrl.playerData.team.value"></span></a></td>
 			</tr>
 			<tr class="odd">
 				<td class="qb"><span ng-bind="plCtrl.playerData.injury.title"></span></td>
 				<td class="q"><span ng-bind="plCtrl.playerData.injury.value"></span></td>
 				<td class="center">&nbsp;</td>
-				<td class="qb"><a ng-href='index.php?p=public_player_info.inc&player_id={{plCtrl.playerData.name.id}}&f=1' class='bl'><span
+				<td class="qb"><a ng-href='http://www.hockeyarena.net/{{plCtrl.lang}}/index.php?p=public_player_info.inc&player_id={{plCtrl.playerData.name.id}}&f=1' class='bl'><span
 						ng-bind="plCtrl.playerData.quality.title"></span></a></td>
 				<td class="q"><span id='q'>
 					<div ng-show="plCtrl.playerData.quality.investigated" class="target-img"></div>
@@ -75,7 +75,7 @@
 				<td class="qb"><span ng-bind="plCtrl.playerData.salary.title"></span></td>
 				<td class="q"><span ng-bind="plCtrl.playerData.salary.value"></span></td>
 				<td class="center">&nbsp;</td>
-				<td class="qb"><a ng-href='index.php?p=public_player_info.inc&player_id={{plCtrl.playerData.name.id}}&f=1' class='bl'><span
+				<td class="qb"><a ng-href='http://www.hockeyarena.net/{{plCtrl.lang}}/index.php?p=public_player_info.inc&player_id={{plCtrl.playerData.name.id}}&f=1' class='bl'><span
 						ng-bind="plCtrl.playerData.potential.title"></span></a></td>
 				<td class="q"><span id='p'><a href='javascript: void(0)' title='{{plCtrl.playerData.potential.tips}}'>
 					<div ng-show="plCtrl.playerData.potential.investigated" class="target-img"></div>
@@ -83,13 +83,13 @@
 					&nbsp;<span ng-bind="plCtrl.playerData.potential.value + '%'"></span></a></span></td>
 			</tr>
 			<tr class="odd">
-				<td class="qb"><a ng-href='index.php?p=manager_player_satisfaction.inc&player_id={{plCtrl.playerData.name.id}}' class='bl'><span
+				<td class="qb"><a ng-href='http://www.hockeyarena.net/{{plCtrl.lang}}/index.php?p=manager_player_satisfaction.inc&player_id={{plCtrl.playerData.name.id}}' class='bl'><span
 						ng-bind="plCtrl.playerData.satisfaction.title"></span></a></td>
-				<td class="q"><a ng-href='index.php?p=manager_player_satisfaction.inc&player_id={{plCtrl.playerData.name.id}}' class='bl'><span
+				<td class="q"><a ng-href='http://www.hockeyarena.net/{{plCtrl.lang}}/index.php?p=manager_player_satisfaction.inc&player_id={{plCtrl.playerData.name.id}}' class='bl'><span
 						ng-bind="plCtrl.playerData.satisfaction.value + '%'"></span></a></td>
 				<td class="center">&nbsp;</td>
 				<td class="qb"><span ng-bind="plCtrl.playerData.loyalty.title"></span></td>
-				<td class="q"><a ng-href='index.php?p=manager_player_loyalty.inc&player_id={{plCtrl.playerData.name.id}}'><div class="expand-img" title='Повысить лояльность'></div></a>&nbsp;&nbsp;<span ng-show="plCtrl.playerData.loyalty.unknown">
+				<td class="q"><a ng-href='http://www.hockeyarena.net/{{plCtrl.lang}}/index.php?p=manager_player_loyalty.inc&player_id={{plCtrl.playerData.name.id}}'><div class="expand-img" title='Повысить лояльность'></div></a>&nbsp;&nbsp;<span ng-show="plCtrl.playerData.loyalty.unknown">
 					<div class="question2-img"></div>&nbsp;</span><span ng-bind="plCtrl.playerData.loyalty.value"></span></td>
 			</tr>
 			<tr class="">
@@ -105,7 +105,7 @@
 			</tr>
 			<tr class="odd ng-hide">
 				<td class="qb"><span ng-bind="plCtrl.playerData.relativeSkillsSumLeague.title"></span></td>
-				<td class="q"><a href='index.php?p=public_player_info.inc&player_id=33947916' class='bl'><span
+				<td class="q"><a href='http://www.hockeyarena.net/{{plCtrl.lang}}/index.php?p=public_player_info.inc&player_id=33947916' class='bl'><span
 						ng-bind="plCtrl.playerData.relativeSkillsSumLeague.value + '%'"></span></a></td>
 				<td class="center">&nbsp;</td>
 				<td class="qb"><span ng-bind="plCtrl.playerData.cost.title"></span></td>

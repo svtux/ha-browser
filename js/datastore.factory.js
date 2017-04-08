@@ -6,7 +6,8 @@
 angular.module("haBrowser")
 	.factory("DataStore", function($resource) {
 			return {
-				player: $resource("player?id=:id")
+				player: $resource("player?id=:id"),
+				players: $resource("players")
 			};
 		}
 	);

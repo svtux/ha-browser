@@ -1,0 +1,6 @@
+<div class="game-list">
+	<div ng-repeat="link in gCtrl.list">
+		<a ng-href="{{link}}" ng-bind="link" ng-click="gCtrl.showGame(link, $event)"></a>
+	</div>
+</div>
+<div class="game-content" id="gameContent"></div>

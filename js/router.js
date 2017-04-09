@@ -9,6 +9,14 @@ angular.module("haBrowser")
 					templateUrl: "template/players.table.html",
 					controller: "PlayersController as plCtrl"
 				})
+				.when("/games", {
+					templateUrl: "template/games.html",
+					controller: "GamesController as gCtrl"
+				})
+				.when("/games/:gameID", {
+					templateUrl: "template/games.html",
+					controller: "GamesController as gCtrl"
+				})
 				.otherwise({
 					redirectTo: "/"
 				});

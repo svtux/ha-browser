@@ -5,11 +5,14 @@
  */
 
 angular.module("haBrowser")
-	.controller("GamesController", function(DataStore, $routeParams, $http) {
-		var $ = angular.element;
+	.controller("GamesController", function(DataStore, $routeParams, $http, $route, $scope) {
+		var currRoute = $route.current;
+		$scope.$on("$locationChangeSuccess", function(ev, current){
+			$route.current = currRoute;
+		});
 		this.list = DataStore.gamesList.query();
 
-		this.gameID = $routeParams.gameID;
+		this.gameID = $routeParams.gameID || "";
 
 		if (this.gameID) {
 			console.log(this.gameID);
@@ -22,6 +25,8 @@ angular.module("haBrowser")
 
 		this.showContent = function(data) {
 			this.gameData = data;
+			// history.pushState({}, "", "#/games/" + this.gameID);
+			location.hash = "#/games/" + this.gameID;
 			document.getElementById("gameContent").innerHTML = this.gameData;
 		};
 
@@ -29,8 +34,11 @@ angular.module("haBrowser")
 			if (event) {
 				event.preventDefault();
 			}
+			if (id) {
+				this.gameID = id;
+			}
 			var host = ""; //http://ha-browser.itdom.org/";
-			var url = host + "db/games/" + (id || this.gameID || "");
+			var url = host + "db/games/" + this.gameID;
 			// DataStore.game.get({id: id || this.gameID || ""}, this.showContent.bind(this));
 			$http.get(url).then(function(response){
 				this.showContent(response.data);

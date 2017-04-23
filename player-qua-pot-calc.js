@@ -41,12 +41,12 @@
 			if (quality !== undefined) {
 				// сохраняем значение работоспособности для восстановления
 				selectedRow.quality = getQualityValue(selectedRow);
-				setQualityValue(selectedRow, quality);
+				setQualityValue(selectedRow, Math.round(quality));
 			}
 			if (potential !== undefined) {
 				// сохраняем значение потенциала для восстановления
 				selectedRow.potential = getPotentialValue(selectedRow);
-				setPotentialValue(selectedRow, potential);
+				setPotentialValue(selectedRow, alignPotential(potential));
 				setPotentialTip(selectedRow);
 			}
 		}
@@ -153,9 +153,12 @@
 	}
 	function alignPotential(value) {
 		var potentialList = [106, 100, 94, 88, 82, 76, 71, 65, 59, 53, 47, 41, 35, 29, 24, 18, 12, 6, 0];
-		if (potentialList.indexOf(value) === -1) {
+		if (potentialList.indexOf(value) !== -1) {
+			return value;
+		} else {
 			if (isNaN(parseInt(value)) || value > potentialList[0] || value < 0) {
-				throw "ERROR! Incorrect value: " + value;
+				console.error(new Error("ERROR! Incorrect value: " + value));
+				return value;
 			}
 			for (var i = 0; i < potentialList.length; i++) {
 				if (potentialList[i] < value) {
@@ -168,8 +171,6 @@
 					}
 				}
 			}
-		} else {
-			return value;
 		}
 	}
 	function addInputElements(table) {

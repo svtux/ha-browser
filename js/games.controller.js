@@ -6,6 +6,7 @@
 
 angular.module("haBrowser")
 	.controller("GamesController", function(DataStore, $routeParams, $http, $route, $scope) {
+		document.title = "Список игр";
 		var currRoute = $route.current;
 		$scope.$on("$locationChangeSuccess", function(ev, current){
 			$route.current = currRoute;
@@ -15,7 +16,6 @@ angular.module("haBrowser")
 		this.gameID = $routeParams.gameID || "";
 
 		if (this.gameID) {
-			console.log(this.gameID);
 			showGame.bind(this)();
 		}
 

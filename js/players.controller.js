@@ -6,6 +6,7 @@
 
 angular.module("haBrowser")
 	.controller("PlayersController", function(DataStore, $locale) {
+		document.title = "Список игроков";
 		var defaultData = {
 			"name": {title: "", value: "Player Name", id: 0, rex: "(.*),\\sID\\s(\\d+)"},
 			"skillsSum": {title: "Сумма умений", value: 1, rex: "(Сумма\\sумений)\\s(\\d+)"},

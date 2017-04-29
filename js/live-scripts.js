@@ -60,56 +60,76 @@ function sendToServer(data) {
 	xhr.send(data);
 }
 
-(function(min, type) {
+(function(type, min, max, evenness) {
 // ставка на спонсора
 // index.php?p=manager_league_sponsors.inc&spo_id=4636545&action=offer_sql
 // type=1 - центр
 // type=2 - бортик
 // sum=123 - сумма ставки из элемента #max (td #1)
-	processList(min, type);
+// min - минимальный размер ставки
+// max - максимальный потолок ставки
+// evenness - чётность
+	type = type || 1; // 1 - center, 2 - board
+	min = min || 0;
+	max = max || 0;
+	/** @type {{id: string, sum: number}[]} */
+	var betList = processList();
 
-	function processList(min, type) {
-		min = min || 0;
-		type = type || 1; // 1 - center, 2 - board
+	sendToHAServer(0, type, betList);
+
+	function processList() {
+		/** @type {{id: string, sum: number}[]} */
+		var betList = [];
 		var list = document.querySelectorAll("#page table a.nib");
 		for (var i = 0, l = list.length; i < l; i++) {
 			var id = list[i].href.match(/spo_id=(\d+)/)[1];
 			var sum = parseInt(list[i].parentElement.parentElement.children[1].innerText.replace(/\s/g, ""));
-			if (sum >= min) {
-				setTimeout((function (id, sum) {
-					return function () {
-						console.log(id, type, sum);
-						sendToHAServer(id, type, sum);
-					};
-				})(id, sum), i * 3000);
-			}
+			betList.push({id: id, sum: sum});
+		}
+		return betList;
+	}
+
+	function sendToHAServer(i, type, betList) {
+		if (i >= betList.length) {
+			console.log("Bet list ended");
+			return;
+		}
+
+		var id = betList[i].id;
+		var sum = betList[i].sum;
+		console.log("Bet: #", id, (type == 1 ? "center" : "board"), sum);
+
+		if (sum >= min && (max == 0 || sum <= max)) {
+			var host = "http://www.hockeyarena.net/ru/";
+			var path = "index.php?p=manager_league_sponsors.inc&spo_id={id}&action=offer_sql";
+			var url = host + path.replace("{id}", id);
+			var data = ["type=" + type, "sum=" + sum];
+
+			var xhr = new XMLHttpRequest();
+			xhr.open("POST", url, true);
+			xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+			xhr.onreadystatechange = function () {
+				if (xhr.readyState != 4) return;
+				if (xhr.status == 200) {
+					if (xhr.responseText == 0) {
+						alert("Ошибка обработки данных. Код ответа: " + xhr.responseText + "\nПовторите отправку.");
+					} else {
+						//console.log("Ответ сервера: " + xhr.responseText);
+						var delay = Math.random() * 3000 ^ 0; // случайная задержка до 3000мс.
+						setTimeout(function(){
+							sendToHAServer(i + 1, type, betList);
+						}, delay);
+					}
+				} else {
+					alert("Ошибка отправки данных. Код ответа: " + xhr.status + " (" + xhr.statusText + ")" + " Повторите отправку.");
+				}
+			};
+			xhr.send(data.join("&"));
+		} else {
+			sendToHAServer(i + 1, type, betList);
 		}
 	}
-
-	function sendToHAServer(id, type, sum) {
-		var host = "http://www.hockeyarena.net/ru/";
-		var path = "index.php?p=manager_league_sponsors.inc&spo_id={id}&action=offer_sql";
-		var url = host + path.replace("{id}", id);
-		var data = ["type=" + type, "sum=" + sum];
-
-		var xhr = new XMLHttpRequest();
-		xhr.open("POST", url, true);
-		xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-		xhr.onreadystatechange = function () {
-			if (xhr.readyState != 4) return;
-			if (xhr.status == 200) {
-				if (xhr.responseText == 0) {
-					alert("Ошибка обработки данных. Код ответа: " + xhr.responseText + "\nПовторите отправку.");
-				} else {
-					console.log("Ответ сервера: " + xhr.responseText);
-				}
-			} else {
-				alert("Ошибка отправки данных. Код ответа: " + xhr.status + " (" + xhr.statusText + ")" + " Повторите отправку.");
-			}
-		};
-		xhr.send(data.join("&"));
-	}
-})(0, 1);
+})(1, 0);
 
 (function() {
 // сохранение данных матча на сервер

@@ -5,7 +5,11 @@
 Header('Access-Control-Allow-Origin: *');
 
 $table = $_POST['table'];
-$matchID = $_POST['matchId'];
+$matchID = $_POST['matchID'];
+$playerID = $_POST['playerID'];
+$schoolDate = $_POST['schoolDate'];
+$trainingDate = $_POST['trainingDate'];
+$body = $_POST['body'];
 
 if (isset($table)) {
     $data = $_POST['data'] . "\n";
@@ -13,7 +17,6 @@ if (isset($table)) {
     $dbfile = 'db/' . $table . '.txt';
     saveDataToFile($dbfile, $data);
 } else if (isset($matchID)) {
-    $body = $_POST['body'];
     $title = $_POST['title'];
     $matchDate = $_POST['date'];
     $data = '<div id="matchId_' . $matchID . '">'
@@ -32,6 +35,16 @@ if (isset($table)) {
     } catch (Exception $e) {
         echo "0";
     }
+} else if (isset($playerID)) {
+    $data = $body;
+    $dbfile = 'db/players/' . $playerID . '.html';
+    saveDataToFile($dbfile, $data);
+} else if (isset($schoolDate)) {
+    $dbfile = 'db/school/' . $schoolDate . '.html';
+    saveDataToFile($dbfile, $body);
+} else if (isset($trainingDate)) {
+    $dbfile = 'db/training/' . $trainingDate . '.html';
+    saveDataToFile($dbfile, $body);
 }
 
 function saveDataToFile($filename, $savingData) {

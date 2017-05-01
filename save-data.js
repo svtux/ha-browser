@@ -5,7 +5,7 @@
 		alert("Скрипт не будет работать на этой странице.\nОткройте страницу с матчем.");
 		return;
 	}
-	var matchId = location.search.match(/match_id=(\d+)/)[1];
+	var matchID = location.search.match(/match_id=(\d+)/)[1];
 	var body = document.getElementById("page").outerHTML.replace(/<script[^]*?<\/script>/gm,"").replace(/<link[^]*?>/g,"").replace(/color:#ffffff/g,"");
 	var matchDate = body.match(/(\d\d\.\d\d\.\d\d\d\d)/m)[0];
 	var date = matchDate.split(".").join("");
@@ -23,7 +23,7 @@
 			alert('OK: ' + xhr.responseText);
 		}
 	};
-	xhr.send(["matchId=" + matchId, "date=" + date, "title=" + title, "body=" + encodeURIComponent(body)].join("&"));
+	xhr.send(["matchID=" + matchID, "date=" + date, "title=" + title, "body=" + encodeURIComponent(body)].join("&"));
 
 	function correctPageURL(searchString) {
 		return location.href.indexOf(searchString) !== -1;

@@ -1,6 +1,12 @@
-(function(teamId){
+(function(){
 	// Расчёт работоспособности и потенциала игрока по таблице "Рейтинг 16"
 	// на основе полученных из неё данных по итоговой работоспособности и потенциала всей команды
+// javascript:var teamID = 587; var script = document.createElement("script"); script.src="http://ha-browser.itdom.org/player-qua-pot-calc.js"; script.onload=function(){document.body.removeChild(script)}; document.body.appendChild(script);
+	if (typeof window.teamID == "undefined") {
+		alert("Не задан ID команды. Работа завершена.");
+		return;
+	}
+
 	if (!correctPageURL("manager_team_players")) {
 		alert("На этой странице скрипт не работает. Перейдите на страницу manager_team_players.");
 		return;
@@ -209,7 +215,7 @@
 			row.appendChild(newCell);
 		};
 
-		getDataFromHAStatistics(teamId, callback);
+		getDataFromHAStatistics(teamID, callback);
 
 		return {
 			avgQuality: inputQuality,
@@ -321,4 +327,4 @@
 		};
 		xhr.send();
 	}
-})(587);
+})();

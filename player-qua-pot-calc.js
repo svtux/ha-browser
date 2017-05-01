@@ -1,4 +1,4 @@
-(function(){
+(function(teamId){
 	// Расчёт работоспособности и потенциала игрока по таблице "Рейтинг 16"
 	// на основе полученных из неё данных по итоговой работоспособности и потенциала всей команды
 	if (!correctPageURL("manager_team_players")) {
@@ -190,7 +190,27 @@
 		newCell = document.createElement("th");
 		newCell.innerHTML = "Пот:&nbsp;";
 		newCell.appendChild(inputPotential);
-		row.appendChild(newCell);
+
+		var callback = function(result) {
+			// result[0] - работоспособность
+			// result[1] - потенциал
+			// result[2] - потенциал лучших 17
+			// result[3] - потенциал лучших 22
+			var quality = parseFloat(result[0]);
+			var potential = parseFloat(result[1]);
+			if (isNaN(quality)) {
+				quality = 0;
+			}
+			if (isNaN(potential)) {
+				potential = 0;
+			}
+			inputQuality.value = quality;
+			inputPotential.value = potential;
+			row.appendChild(newCell);
+		};
+
+		getDataFromHAStatistics(teamId, callback);
+
 		return {
 			avgQuality: inputQuality,
 			avgPotential: inputPotential
@@ -276,4 +296,29 @@
 	function correctPageURL(searchString) {
 		return location.href.indexOf(searchString) !== -1;
 	}
-})();
+	function getDataFromHAStatistics(teamId, callback) {
+		var url = "http://www.hockeyarena.net/" + location.pathname.split("/")[1] + "/index.php?p=manager_top_teams_league.php";
+		var xhr = new XMLHttpRequest();
+		xhr.open("GET", url, true);
+		xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+		xhr.onreadystatechange = function () {
+			if (xhr.readyState != 4) return;
+			if (xhr.status == 200) {
+				if (xhr.responseText != "") {
+					var result = xhr.responseText.replace(/\n/g, "").match(new RegExp("team_id=" + teamId + "[^]*?<\/tr>", "gm"));
+					var searchIndex = 4;
+					if (result && result[searchIndex]) {
+						callback(result[searchIndex].match(/-?\d\d?\.?\d?%/g));
+					} else {
+						console.error("Ошибка. В ответе не нашлись данные по команде с ID " + teamId);
+					}
+				} else {
+					console.error("Ошибка. Ответ пустой.");
+				}
+			} else {
+				console.error("Ошибка. Код ответа: " + xhr.status + " (" + xhr.statusText + ")" + " Повторите попытку.");
+			}
+		};
+		xhr.send();
+	}
+})(587);

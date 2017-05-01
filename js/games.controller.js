@@ -11,17 +11,15 @@ angular.module("haBrowser")
 		$scope.$on("$locationChangeSuccess", function(ev, current){
 			$route.current = currRoute;
 		});
-		this.list = DataStore.gamesList.query();
+		this.list = DataStore.games.query();
 
 		this.gameID = $routeParams.gameID || "";
+		this.gameData = "";
+		this.showGame = showGame.bind(this);
 
 		if (this.gameID) {
-			showGame.bind(this)();
+			this.showGame();
 		}
-
-		this.gameData = "";
-
-		this.showGame = showGame.bind(this);
 
 		this.showContent = function(data) {
 			this.gameData = data;
@@ -37,10 +35,7 @@ angular.module("haBrowser")
 			if (id) {
 				this.gameID = id;
 			}
-			var host = ""; //http://ha-browser.itdom.org/";
-			var url = host + "db/games/" + this.gameID;
-			// DataStore.game.get({id: id || this.gameID || ""}, this.showContent.bind(this));
-			$http.get(url).then(function(response){
+			DataStore.game.get({id: this.gameID}, function(response){
 				this.showContent(response.data);
 			}.bind(this));
 		}

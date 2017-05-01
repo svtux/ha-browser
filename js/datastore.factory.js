@@ -5,10 +5,13 @@
  */
 angular.module("haBrowser")
 	.factory("DataStore", function($resource) {
-			return {
-				gamesList: $resource("http://ha-browser.itdom.org/data/games.php"),
-				player: $resource("player?id=:id"),
-				players: $resource("players")
-			};
-		}
-	);
+		return {
+			game: $resource("/db/games/:id", {}, {get: {interceptor: {response:
+				function(response) {
+					return response;
+				}}}}),
+			games: $resource("/data/games.php"),
+			player: $resource("/db/players/:id"),
+			players: $resource("/data/players.php")
+		};
+	});

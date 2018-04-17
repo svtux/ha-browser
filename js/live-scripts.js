@@ -97,9 +97,9 @@ function sendToServer(data) {
 
 		var id = betList[i].id;
 		var sum = betList[i].sum;
-		console.log("Bet: #", id, (type == 1 ? "center" : "board"), sum);
 
 		if (sum >= min && (max == 0 || sum <= max)) {
+			console.log("Bet: #", id, (type == 1 ? "center" : "board"), sum);
 			var host = "http://www.hockeyarena.net/ru/";
 			var path = "index.php?p=manager_league_sponsors.inc&spo_id={id}&action=offer_sql";
 			var url = host + path.replace("{id}", id);
@@ -126,10 +126,36 @@ function sendToServer(data) {
 			};
 			xhr.send(data.join("&"));
 		} else {
+			console.log("Bet is MISSED: #", id, (type == 1 ? "center" : "board"), sum);
 			sendToHAServer(i + 1, type, betList);
 		}
 	}
 })(1, 0);
+
+(function(type, homeDress, awayDress) {
+	// type - тип матча, дома или в гостях, 1 или 0
+	// homeDress - id формы дома
+	// awayDress - id формы в гостях
+	// возможные пары:
+	// 164, 408 (347) // 383, 407 // 404, 405, 125 // 415, 416
+	var host = "http://www.hockeyarena.net/ru/";
+	var path = "index.php?p=sponsor_dress_upload_sql.php";
+	var url = host + path;
+	var data = ["dress_file=" + (type ? homeDress : awayDress) + ".png"];
+
+	var xhr = new XMLHttpRequest();
+	xhr.open("POST", url, true);
+	xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+	xhr.onreadystatechange = function () {
+		if (xhr.readyState != 4) return;
+		if (xhr.status == 200) {
+			console.log("Ответ сервера: " + xhr.status + ", " + xhr.statusText);
+		} else {
+			alert("Ошибка отправки данных. Код ответа: " + xhr.status + " (" + xhr.statusText + ")" + " Повторите отправку.");
+		}
+	};
+	xhr.send(data.join("&"));
+})(1, 404, 405);
 
 (function() {
 // сохранение данных матча на сервер

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Save HA data</title>
+</head>
+<body>
+<script>
+	window.addEventListener("message", messageHandler, false);
+	sendData({request:"data"});
+
+	function messageHandler(evt) {
+		console.log(evt.data);
+		if (typeof evt.data === "object" && evt.data.url && evt.data.data) {
+			sendDataToServer(evt.data.url, evt.data.data);
+		}
+	}
+
+	function sendDataToServer(url, data) {
+		var xhr = new XMLHttpRequest();
+		xhr.open("POST", url, true);
+		xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+		xhr.onreadystatechange = function () {
+			if (xhr.readyState !== 4) {
+				return;
+			}
+			if (xhr.status === 200) {
+				sendData("OK: " + xhr.responseText);
+			} else {
+				sendData("ERROR: " + xhr.status + ": " + xhr.statusText);
+			}
+			window.close();
+		};
+		xhr.send(data);
+	}
+
+	function sendData(data) {
+		opener.postMessage(data, "*");
+	}
+</script>
+</body>
+</html>

@@ -2,7 +2,7 @@
  * Created by sv on 11.2.17.
  */
 
-// список выбора в аналитике
+// развёрнутый список выбора "Стоимость и сроки" в аналитике
 document.forms[0].type.multiple = true;
 document.forms[0].type.style.height = "120px";
 document.forms[0].type.style.marginLeft = "200px";
@@ -60,15 +60,82 @@ function sendToServer(data) {
 	xhr.send(data);
 }
 
+(function() {
+	// ШАБЛОН
+	// сохранение данных
+	// URL страницы должен содержать строку вида "public_player_info.inc&player_id=40464747"
+	var pageMarker = "public_player_info\\.inc";
+	var playerIdMarker = "player_id=\\d+";
+	if (!isValidPage(pageMarker, playerIdMarker)) {
+		alert("Скрипт не может найти данных на этой странице, перейдите на страницу профиля игрока.");
+		return;
+	}
+
+	var url = 'http://ha-browser.itdom.org/save-player-data.php';
+	var data = [
+		"id=" + id,
+		"name=" + encodeURIComponent(name),
+		"body=" + encodeURIComponent(body)
+	].join("&");
+
+	var retData = {
+		id: id,
+		name: name,
+		title: title,
+		body: body,
+		data: data,
+		url: url
+	};
+
+	window.addEventListener("message", messageHandler, false);
+	var popupWindow = window.open("http://ha-browser.itdom.org/save-data.html");
+
+	function messageHandler(evt) {
+		console.log(evt.data);
+		if (typeof evt.data === "object" && evt.data.request === "data") {
+			evt.source.postMessage(retData, "*");
+		}
+	}
+
+	function isValidPage() {
+		var args = Array.prototype.slice.call(arguments);
+		var pageRex = new RegExp(args.join(".*"));
+		return pageRex.test(location.search);
+	}
+
+	function sendDataToServer(url, data) {
+		var xhr = new XMLHttpRequest();
+		xhr.open("POST", url, true);
+		xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+		xhr.onreadystatechange = function () {
+			if (xhr.readyState != 4) return;
+			if (xhr.status != 200) {
+				alert('ERROR: ' + xhr.status + ': ' + xhr.statusText);
+			} else {
+				alert('OK: ' + xhr.responseText);
+			}
+		};
+		xhr.send(data);
+	}
+})();
+
 (function(type, min, max, evenness) {
-// ставка на спонсора
-// index.php?p=manager_league_sponsors.inc&spo_id=4636545&action=offer_sql
-// type=1 - центр
-// type=2 - бортик
-// sum=123 - сумма ставки из элемента #max (td #1)
-// min - минимальный размер ставки
-// max - максимальный потолок ставки
-// evenness - чётность
+	// ставка на спонсора
+	// index.php?p=manager_league_sponsors.inc&spo_id=4636545&action=offer_sql
+	// type=1 - центр
+	// type=2 - бортик
+	// sum=123 - сумма ставки из элемента #max (td #1)
+	// min - минимальный размер ставки
+	// max - максимальный потолок ставки
+	// evenness - чётность
+
+	// URL страницы должен содержать строку вида "manager_league_sponsors.inc"
+	var pageMarker = "manager_league_sponsors\\.inc";
+	if (!isValidPage(pageMarker)) {
+		alert("Скрипт не может найти данных на этой странице, перейдите на страницу спонсора.");
+		return;
+	}
+
 	type = type || 1; // 1 - center, 2 - board
 	min = min || 0;
 	max = max || 0;
@@ -76,6 +143,12 @@ function sendToServer(data) {
 	var betList = processList();
 
 	sendToHAServer(0, type, betList);
+
+	function isValidPage() {
+		var args = Array.prototype.slice.call(arguments);
+		var pageRex = new RegExp(args.join(".*"));
+		return pageRex.test(location.search);
+	}
 
 	function processList() {
 		/** @type {{id: string, sum: number}[]} */
@@ -100,7 +173,7 @@ function sendToServer(data) {
 
 		if (sum >= min && (max == 0 || sum <= max)) {
 			console.log("Bet: #", id, (type == 1 ? "center" : "board"), sum);
-			var host = "http://www.hockeyarena.net/ru/";
+			var host = "https://www.hockeyarena.net/ru/";
 			var path = "index.php?p=manager_league_sponsors.inc&spo_id={id}&action=offer_sql";
 			var url = host + path.replace("{id}", id);
 			var data = ["type=" + type, "sum=" + sum];
@@ -114,6 +187,10 @@ function sendToServer(data) {
 					if (xhr.responseText == 0) {
 						alert("Ошибка обработки данных. Код ответа: " + xhr.responseText + "\nПовторите отправку.");
 					} else {
+						if (i >= betList.length) {
+							console.log("Bet list ended");
+							return;
+						}
 						//console.log("Ответ сервера: " + xhr.responseText);
 						var delay = Math.random() * 3000 ^ 0; // случайная задержка до 3000мс.
 						setTimeout(function(){
@@ -138,7 +215,7 @@ function sendToServer(data) {
 	// awayDress - id формы в гостях
 	// возможные пары:
 	// 164, 408 (347) // 383, 407 // 404, 405, 125 // 415, 416
-	var host = "http://www.hockeyarena.net/ru/";
+	var host = "https://www.hockeyarena.net/ru/";
 	var path = "index.php?p=sponsor_dress_upload_sql.php";
 	var url = host + path;
 	var data = ["dress_file=" + (type ? homeDress : awayDress) + ".png"];
@@ -164,7 +241,13 @@ function sendToServer(data) {
 })();
 
 (function() {
-// сохранение данных тренировки
+	// сохранение данных тренировки
+	// URL страницы должен содержать строку вида "pmanager_training_form1.php"
+	var pageMarker = "manager_training_form1\\.php";
+	if (!isValidPage(pageMarker)) {
+		alert("Скрипт не может найти данных на этой странице, перейдите на страницу тренировок.");
+		return;
+	}
 	var table1 = cloneElementWithPreparing(document.getElementById("table-1"));
 	removeRedundantTHeads(table1);
 	removeRedundantOptions(table1);
@@ -191,19 +274,34 @@ function sendToServer(data) {
 		+ table2.outerHTML
 		+ '</body></html>';
 	var url = 'http://ha-browser.itdom.org/save-training.php';
+	var data = [
+		"date=" + date,
+		"body=" + encodeURIComponent(body)
+	].join("&");
 
-	var xhr = new XMLHttpRequest();
-	xhr.open("POST", url, true);
-	xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-	xhr.onreadystatechange = function () {
-		if (xhr.readyState != 4) return;
-		if (xhr.status != 200) {
-			alert('ERROR: ' + xhr.status + ': ' + xhr.statusText);
-		} else {
-			alert('OK: ' + xhr.responseText);
-		}
+	var retData = {
+		date: date,
+		title: title,
+		body: body,
+		data: data,
+		url: url
 	};
-	xhr.send(["date=" + date, "body=" + encodeURIComponent(body)].join("&"));
+
+	window.addEventListener("message", messageHandler, false);
+	var popupWindow = window.open("http://ha-browser.itdom.org/save-data.html");
+
+	function messageHandler(evt) {
+		console.log(evt.data);
+		if (typeof evt.data === "object" && evt.data.request === "data") {
+			evt.source.postMessage(retData, "*");
+		}
+	}
+
+	function isValidPage() {
+		var args = Array.prototype.slice.call(arguments);
+		var pageRex = new RegExp(args.join(".*"));
+		return pageRex.test(location.search);
+	}
 
 	function cloneElementWithPreparing(element) {
 		var source = element.outerHTML.replace(new RegExp("<script[^]*?<\\/script>", "gm"), "");
@@ -234,12 +332,18 @@ function sendToServer(data) {
 			}
 		}
 	}
-
-	// (function(){function f(c){c=c.outerHTML.replace(RegExp("<script[^]*?<\\/script>","gm"),"");var a=document.createElement("div");a.innerHTML=c;return a.children[0]}function g(a){for(var b=a.querySelectorAll("thead"),c=b.length-1;0<c;c--)a.removeChild(b[c])}function h(a){a=a.querySelectorAll("select");for(var b=a.length-1;0<=b;b--)for(var c=a[b],d=c.options.length-1;0<=d;d--)c.options[d].selected||(c.options[d]=null)}var d=f(document.getElementById("table-1"));g(d);h(d);var e=f(document.getElementById("table-2"));g(e);h(e);var a=new Date;21<=a.getHours()&&(a=new Date(a.getTime()+864E5));var k=a.getMonth()+1,l=a.getDate(),a=a.getFullYear()+(0>k-10?"0":"")+k+(0>l-10?"0":"")+l,d='<!DOCTYPE html><html><head><meta charset="utf-8"><title>\u0422\u0420\u0415\u041d\u0418\u0420\u041e\u0412\u041a\u0418 '+a+"</title></head><body>"+d.outerHTML+"<br>"+e.outerHTML+"</body></html>",b=new XMLHttpRequest;b.open("POST","http://ha-browser.itdom.org/save-training.php",!0);b.setRequestHeader("Content-Type","application/x-www-form-urlencoded");b.onreadystatechange=function(){4==b.readyState&&(200!=b.status?alert("ERROR: "+b.status+": "+b.statusText):alert("OK: "+b.responseText))};b.send(["date="+a,"body="+encodeURIComponent(d)].join("&"))})();
 })();
+/*сохранение данных тренировки*/(function(){function g(c){c=c.outerHTML.replace(RegExp("<script[^]*?<\\/script>","gm"),"");var a=document.createElement("div");a.innerHTML=c;return a.children[0]}function h(c){for(var a=c.querySelectorAll("thead"),d=a.length-1;0<d;d--)c.removeChild(a[d])}function k(a){a=a.querySelectorAll("select");for(var c=a.length-1;0<=c;c--)for(var d=a[c],b=d.options.length-1;0<=b;b--)d.options[b].selected||(d.options[b]=null)}if(function(){return(new RegExp(Array.prototype.slice.call(arguments).join(".*"))).test(location.search)}("manager_training_form1\\.php")){var b=g(document.getElementById("table-1"));h(b);k(b);var e=g(document.getElementById("table-2"));h(e);k(e);var a=new Date;21<=a.getHours()&&(a=new Date(a.getTime()+864E5));var f=a.getMonth()+1,l=a.getDate();a=a.getFullYear()+(0>f-10?"0":"")+f+(0>l-10?"0":"")+l;f="ТРЕНИРОВКИ "+a;b='<!DOCTYPE html><html><head><meta charset="utf-8"><title>'+f+"</title></head><body>"+b.outerHTML+"<br>"+e.outerHTML+"</body></html>";e=["date="+a,"body="+encodeURIComponent(b)].join("&");var m={date:a,title:f,body:b,data:e,url:"http://ha-browser.itdom.org/save-training.php"};window.addEventListener("message",function(a){console.log(a.data);"object"===typeof a.data&&"data"===a.data.request&&a.source.postMessage(m,"*")},!1);window.open("http://ha-browser.itdom.org/save-data.html")}else alert("Скрипт не может найти данных на этой странице, перейдите на страницу тренировок.")})();
 
 (function() {
-// сохранение данных ДЮСШ
+	// сохранение данных ДЮСШ
+	// URL страницы должен содержать строку вида "manager_youth_school_form.php"
+	var pageMarker = "manager_youth_school_form\\.php";
+	if (!isValidPage(pageMarker)) {
+		alert("Скрипт не может найти данных на этой странице, перейдите на страницу ДЮСШ.");
+		return;
+	}
+
 	var table1 = cloneElementWithPreparing(document.getElementById("table-1"));
 	removeRedundantTHeads(table1);
 	removeRedundantColumns(table1);
@@ -255,19 +359,34 @@ function sendToServer(data) {
 		+ table1.outerHTML
 		+ '</body></html>';
 	var url = 'http://ha-browser.itdom.org/save-school-data.php';
+	var data = [
+		"date=" + date,
+		"body=" + encodeURIComponent(body)
+	].join("&");
 
-	var xhr = new XMLHttpRequest();
-	xhr.open("POST", url, true);
-	xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-	xhr.onreadystatechange = function () {
-		if (xhr.readyState != 4) return;
-		if (xhr.status != 200) {
-			alert('ERROR: ' + xhr.status + ': ' + xhr.statusText);
-		} else {
-			alert('OK: ' + xhr.responseText);
-		}
+	var retData = {
+		date: date,
+		title: title,
+		body: body,
+		data: data,
+		url: url
 	};
-	xhr.send(["date=" + date, "body=" + encodeURIComponent(body)].join("&"));
+
+	window.addEventListener("message", messageHandler, false);
+	var popupWindow = window.open("http://ha-browser.itdom.org/save-data.html");
+
+	function messageHandler(evt) {
+		console.log(evt.data);
+		if (typeof evt.data === "object" && evt.data.request === "data") {
+			evt.source.postMessage(retData, "*");
+		}
+	}
+
+	function isValidPage() {
+		var args = Array.prototype.slice.call(arguments);
+		var pageRex = new RegExp(args.join(".*"));
+		return pageRex.test(location.search);
+	}
 
 	function cloneElementWithPreparing(element) {
 		var source = element.outerHTML.replace(new RegExp("<script[^]*?<\\/script>", "gm"), "");
@@ -296,12 +415,18 @@ function sendToServer(data) {
 			}
 		}
 	}
-
-	// (function(){var c=function(a){a=a.outerHTML.replace(RegExp("<script[^]*?<\\/script>","gm"),"");var b=document.createElement("div");b.innerHTML=a;return b.children[0]}(document.getElementById("table-1"));(function(a){for(var b=a.querySelectorAll("thead"),e=b.length-1;0<e;e--)a.removeChild(b[e])})(c);(function(a){for(var b=a.rows.length-1;0<=b;b--)for(var e=a.rows[b],d=e.cells.length,c=d-1;c>=d-3;c--)e.removeChild(e.cells[c])})(c);var d=new Date,f=d.getMonth()+1,g=d.getDate(),d=d.getFullYear()+(0>f-10?"0":"")+f+(0>g-10?"0":"")+g,c='<!DOCTYPE html><html><head><meta charset="utf-8"><title>\u0414\u042e\u0421\u0428 '+d+"</title></head><body>"+c.outerHTML+"</body></html>",a=new XMLHttpRequest;a.open("POST","http://ha-browser.itdom.org/save-school-data.php",!0);a.setRequestHeader("Content-Type","application/x-www-form-urlencoded");a.onreadystatechange=function(){4==a.readyState&&(200!=a.status?alert("ERROR: "+a.status+": "+a.statusText):alert("OK: "+a.responseText))};a.send(["date="+d,"body="+encodeURIComponent(c)].join("&"))})();
 })();
+/*сохранение данных ДЮСШ*/(function(){if(function(){return(new RegExp(Array.prototype.slice.call(arguments).join(".*"))).test(location.search)}("manager_youth_school_form\\.php")){var b=function(c){c=c.outerHTML.replace(RegExp("<script[^]*?<\\/script>","gm"),"");var f=document.createElement("div");f.innerHTML=c;return f.children[0]}(document.getElementById("table-1"));(function(c){for(var f=c.querySelectorAll("thead"),a=f.length-1;0<a;a--)c.removeChild(f[a])})(b);(function(c){for(var a=c.rows.length-1;0<=a;a--)for(var b=c.rows[a],d=b.cells.length,e=d-1;e>=d-3;e--)b.removeChild(b.cells[e])})(b);var a=new Date,d=a.getMonth()+1,e=a.getDate();a=a.getFullYear()+(0>d-10?"0":"")+d+(0>e-10?"0":"")+e;d="ДЮСШ "+a;b='<!DOCTYPE html><html><head><meta charset="utf-8"><title>'+d+"</title></head><body>"+b.outerHTML+"</body></html>";e=["date="+a,"body="+encodeURIComponent(b)].join("&");var g={date:a,title:d,body:b,data:e,url:"http://ha-browser.itdom.org/save-school-data.php"};window.addEventListener("message",function(a){console.log(a.data);"object"===typeof a.data&&"data"===a.data.request&&a.source.postMessage(g,"*")},!1);window.open("http://ha-browser.itdom.org/save-data.html")}else alert("Скрипт не может найти данных на этой странице, перейдите на страницу ДЮСШ.")})();
 
 (function() {
-// сохранение данных игрока
+	// сохранение данных игрока
+	// URL страницы должен содержать строку вида "public_player_info.inc&player_id=40464747"
+	var pageMarker = "public_player_info\\.inc";
+	var playerIdMarker = "id=\\d+";
+	if (!isValidPage(pageMarker, playerIdMarker)) {
+		alert("Скрипт не может найти данных на этой странице, перейдите на страницу профиля игрока.");
+		return;
+	}
 	var content = cloneElementWithPreparing(document.getElementById("page"));
 	removeRedundantElements(content);
 	replaceTablesOutForm(content);
@@ -316,19 +441,36 @@ function sendToServer(data) {
 		+ '</body></html>';
 	body = body.replace(/&amp;/g, "&");
 	var url = 'http://ha-browser.itdom.org/save-player-data.php';
+	var data = [
+		"id=" + id,
+		"name=" + encodeURIComponent(name),
+		"body=" + encodeURIComponent(body)
+	].join("&");
 
-	var xhr = new XMLHttpRequest();
-	xhr.open("POST", url, true);
-	xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-	xhr.onreadystatechange = function () {
-		if (xhr.readyState != 4) return;
-		if (xhr.status != 200) {
-			alert('ERROR: ' + xhr.status + ': ' + xhr.statusText);
-		} else {
-			alert('OK: ' + xhr.responseText);
-		}
+	var retData = {
+		id: id,
+		name: name,
+		title: title,
+		body: body,
+		data: data,
+		url: url
 	};
-	xhr.send(["id=" + id, "name=" + encodeURIComponent(name), "body=" + encodeURIComponent(body)].join("&"));
+
+	window.addEventListener("message", messageHandler, false);
+	var popupWindow = window.open("http://ha-browser.itdom.org/save-data.html");
+
+	function messageHandler(evt) {
+		console.log(evt.data);
+		if (typeof evt.data === "object" && evt.data.request === "data") {
+			evt.source.postMessage(retData, "*");
+		}
+	}
+
+	function isValidPage() {
+		var args = Array.prototype.slice.call(arguments);
+		var pageRex = new RegExp(args.join(".*"));
+		return pageRex.test(location.search);
+	}
 
 	function cloneElementWithPreparing(element) {
 		var source = element.outerHTML
@@ -355,34 +497,55 @@ function sendToServer(data) {
 		}
 		content.removeChild(form);
 	}
-
-	// (function(){var c=function(a){a=a.outerHTML.replace(RegExp("<script[^]*?<\\/script>","gm"),"").replace(RegExp("<style[^]*?<\\/style>","gm"),"");var b=document.createElement("div");b.innerHTML=a;return b.children[0]}(document.getElementById("page"));(function(a){a.removeChild(a.querySelector("form.uniForm"));a.removeChild(a.querySelector("#linedet"));a.removeChild(a.querySelector("#auto_train"));a.removeChild(a.firstElementChild);a.removeChild(a.firstElementChild);a.removeChild(a.lastElementChild)})(c);(function(a){for(var b=a.querySelector("form");0<b.children.length;)a.insertBefore(b.children[0],b);a.removeChild(b)})(c);var d=c.querySelector("table").innerText.match(/\s*(.*\s?.*),\sid\s(\d+)/),e=d[1],d=d[2],c='<!DOCTYPE html><html><head><meta charset="utf-8"><title>'+(e+", id "+d)+"</title></head><body>"+c.outerHTML+"</body></html>",c=c.replace(/&amp;/g,"&"),b=new XMLHttpRequest;b.open("POST","http://ha-browser.itdom.org/save-player-data.php",!0);b.setRequestHeader("Content-Type","application/x-www-form-urlencoded");b.onreadystatechange=function(){4==b.readyState&&(200!=b.status?alert("ERROR: "+b.status+": "+b.statusText):alert("OK: "+b.responseText))};b.send(["id="+d,"name="+encodeURIComponent(e),"body="+encodeURIComponent(c)].join("&"))})();
 })();
+/*сохранение данных игрока*/(function(){if(function(){return(new RegExp(Array.prototype.slice.call(arguments).join(".*"))).test(location.search)}("public_player_info\\.inc","id=\\d+")){var b=function(a){a=a.outerHTML.replace(RegExp("<script[^]*?<\\/script>","gm"),"").replace(RegExp("<style[^]*?<\\/style>","gm"),"");var b=document.createElement("div");b.innerHTML=a;return b.children[0]}(document.getElementById("page"));(function(a){a.removeChild(a.querySelector("form.uniForm"));a.removeChild(a.querySelector("#linedet"));a.removeChild(a.querySelector("#auto_train"));a.removeChild(a.firstElementChild);a.removeChild(a.firstElementChild);a.removeChild(a.lastElementChild)})(b);(function(a){for(var b=a.querySelector("form");0<b.children.length;)a.insertBefore(b.children[0],b);a.removeChild(b)})(b);var c=b.querySelector("table").innerText.match(/\s*(.*\s?.*),\sid\s(\d+)/),d=c[1];c=c[2];var e=d+", id "+c;b='<!DOCTYPE html><html><head><meta charset="utf-8"><title>'+e+"</title></head><body>"+b.outerHTML+"</body></html>";b=b.replace(/&amp;/g,"&");var f=["id="+c,"name="+encodeURIComponent(d),"body="+encodeURIComponent(b)].join("&"),g={id:c,name:d,title:e,body:b,data:f,url:"http://ha-browser.itdom.org/save-player-data.php"};window.addEventListener("message",function(a){console.log(a.data);"object"===typeof a.data&&"data"===a.data.request&&a.source.postMessage(g,"*")},!1);window.open("http://ha-browser.itdom.org/save-data.html")}else alert("Скрипт не может найти данных на этой странице, перейдите на страницу профиля игрока.")})();
 
 (function() {
-// сохранение данных уволенного игрока
+	// сохранение данных уволенного игрока
+	// URL страницы должен содержать строку вида "manager_player_fire_sql.php&player_id=40464747"
+	var pageMarker = "manager_player_fire_sql\\.php";
+	var playerIdMarker = "player_id=\\d+";
+	if (!isValidPage(pageMarker, playerIdMarker)) {
+		alert("Скрипт не может найти данных на этой странице, нужна страница доступная только после удаления игрока.");
+		return;
+	}
+
 	var table = "removed_players";
 	var data = {
 		content: document.getElementById("page").innerText.trim().replace(/\n/g,"\\n"),
 		playerID: location.href.match(/player_id=(\d+)/)[1]
 	};
 	var url = 'http://ha-browser.itdom.org/save-data.php';
+	var sentData = [
+		"table=" + table,
+		"data=" + encodeURIComponent(JSON.stringify(data))
+	].join("&");
 
-	var xhr = new XMLHttpRequest();
-	xhr.open("POST", url, true);
-	xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-	xhr.onreadystatechange = function () {
-		if (xhr.readyState != 4) return;
-		if (xhr.status != 200) {
-			alert('ERROR: ' + xhr.status + ': ' + xhr.statusText);
-		} else {
-			alert('OK: ' + xhr.responseText);
-		}
+	var retData = {
+		id: data.playerID,
+		table: table,
+		content: data.content,
+		data: sentData,
+		url: url
 	};
-	xhr.send(["table=" + table, "data=" + encodeURIComponent(JSON.stringify(data))].join("&"));
 
-	// (function(){var b={content:document.getElementById("page").innerText.trim().replace(/\n/g,"\\n"),playerID:location.href.match(/player_id=(\d+)/)[1]},a=new XMLHttpRequest;a.open("POST","http://ha-browser.itdom.org/save-data.php",!0);a.setRequestHeader("Content-Type","application/x-www-form-urlencoded");a.onreadystatechange=function(){4==a.readyState&&(200!=a.status?alert("ERROR: "+a.status+": "+a.statusText):alert("OK: "+a.responseText))};a.send(["table=removed_players","data="+encodeURIComponent(JSON.stringify(b))].join("&"))})();
+	window.addEventListener("message", messageHandler, false);
+	var popupWindow = window.open("http://ha-browser.itdom.org/save-data.html");
+
+	function messageHandler(evt) {
+		console.log(evt.data);
+		if (typeof evt.data === "object" && evt.data.request === "data") {
+			evt.source.postMessage(retData, "*");
+		}
+	}
+
+	function isValidPage() {
+		var args = Array.prototype.slice.call(arguments);
+		var pageRex = new RegExp(args.join(".*"));
+		return pageRex.test(location.search);
+	}
 })();
+/*сохранение данных уволенного игрока*/(function(){if(function(){return(new RegExp(Array.prototype.slice.call(arguments).join(".*"))).test(location.search)}("manager_player_fire_sql\\.php","player_id=\\d+")){var b={content:document.getElementById("page").innerText.trim().replace(/\n/g,"\\n"),playerID:location.href.match(/player_id=(\d+)/)[1]},c=["table=removed_players","data="+encodeURIComponent(JSON.stringify(b))].join("&"),d={id:b.playerID,table:"removed_players",content:b.content,data:c,url:"http://ha-browser.itdom.org/save-data.php"};window.addEventListener("message",function(a){console.log(a.data);"object"===typeof a.data&&"data"===a.data.request&&a.source.postMessage(d,"*")},!1);window.open("http://ha-browser.itdom.org/save-data.html")}else alert("Скрипт не может найти данных на этой странице, нужна страница доступная только после удаления игрока.")})();
 
 (function() {
 // сохранение данных об итоговых ставках на спонсоров

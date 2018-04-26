@@ -2,6 +2,8 @@
  * Created by sv on 11.2.17.
  */
 
+//javascript:var teamID = 587; scriptSource = "save-player-data.js"; var script = document.createElement("script"); script.src="http://ha-browser.itdom.org/" + scriptSource; script.onload=function(){document.body.removeChild(script)}; document.body.appendChild(script);
+
 // развёрнутый список выбора "Стоимость и сроки" в аналитике
 document.forms[0].type.multiple = true;
 document.forms[0].type.style.height = "120px";
@@ -71,7 +73,7 @@ function sendToServer(data) {
 		return;
 	}
 
-	var url = 'http://ha-browser.itdom.org/save-player-data.php';
+	var url = "http://ha-browser.itdom.org/save-player-data.php";
 	var data = [
 		"id=" + id,
 		"name=" + encodeURIComponent(name),
@@ -267,13 +269,13 @@ function sendToServer(data) {
 	var date = trainingDate.getFullYear() + (month - 10 < 0 ? "0" : "") + month + (day - 10 < 0 ? "0" : "") + day;
 
 	var title = "ТРЕНИРОВКИ " + date;
-	var body = '<!DOCTYPE html><html><head><meta charset="utf-8"><title>' + title + '</title></head>'
-		+ '<body>'
+	var body = "<!DOCTYPE html><html><head><meta charset=\"utf-8\"><title>" + title + "</title></head>"
+		+ "<body>"
 		+ table1.outerHTML
-		+ '<br>'
+		+ "<br>"
 		+ table2.outerHTML
-		+ '</body></html>';
-	var url = 'http://ha-browser.itdom.org/save-training.php';
+		+ "</body></html>";
+	var url = "http://ha-browser.itdom.org/save-training.php";
 	var data = [
 		"date=" + date,
 		"body=" + encodeURIComponent(body)
@@ -333,7 +335,7 @@ function sendToServer(data) {
 		}
 	}
 })();
-/*сохранение данных тренировки*/(function(){function g(c){c=c.outerHTML.replace(RegExp("<script[^]*?<\\/script>","gm"),"");var a=document.createElement("div");a.innerHTML=c;return a.children[0]}function h(c){for(var a=c.querySelectorAll("thead"),d=a.length-1;0<d;d--)c.removeChild(a[d])}function k(a){a=a.querySelectorAll("select");for(var c=a.length-1;0<=c;c--)for(var d=a[c],b=d.options.length-1;0<=b;b--)d.options[b].selected||(d.options[b]=null)}if(function(){return(new RegExp(Array.prototype.slice.call(arguments).join(".*"))).test(location.search)}("manager_training_form1\\.php")){var b=g(document.getElementById("table-1"));h(b);k(b);var e=g(document.getElementById("table-2"));h(e);k(e);var a=new Date;21<=a.getHours()&&(a=new Date(a.getTime()+864E5));var f=a.getMonth()+1,l=a.getDate();a=a.getFullYear()+(0>f-10?"0":"")+f+(0>l-10?"0":"")+l;f="ТРЕНИРОВКИ "+a;b='<!DOCTYPE html><html><head><meta charset="utf-8"><title>'+f+"</title></head><body>"+b.outerHTML+"<br>"+e.outerHTML+"</body></html>";e=["date="+a,"body="+encodeURIComponent(b)].join("&");var m={date:a,title:f,body:b,data:e,url:"http://ha-browser.itdom.org/save-training.php"};window.addEventListener("message",function(a){console.log(a.data);"object"===typeof a.data&&"data"===a.data.request&&a.source.postMessage(m,"*")},!1);window.open("http://ha-browser.itdom.org/save-data.html")}else alert("Скрипт не может найти данных на этой странице, перейдите на страницу тренировок.")})();
+/*сохранение данных тренировки*/(function(){function g(c){c=c.outerHTML.replace(RegExp("<script[^]*?<\\/script>","gm"),"");var a=document.createElement("div");a.innerHTML=c;return a.children[0]}function h(c){for(var a=c.querySelectorAll("thead"),d=a.length-1;0<d;d--)c.removeChild(a[d])}function k(a){a=a.querySelectorAll("select");for(var c=a.length-1;0<=c;c--)for(var d=a[c],b=d.options.length-1;0<=b;b--)d.options[b].selected||(d.options[b]=null)}if(function(){return(new RegExp(Array.prototype.slice.call(arguments).join(".*"))).test(location.search)}("manager_training_form1\\.php")){var b=g(document.getElementById("table-1"));h(b);k(b);var e=g(document.getElementById("table-2"));h(e);k(e);var a=new Date;21<=a.getHours()&&(a=new Date(a.getTime()+864E5));var f=a.getMonth()+1,l=a.getDate();a=a.getFullYear()+(0>f-10?"0":"")+f+(0>l-10?"0":"")+l;f="ТРЕНИРОВКИ "+a;b="<!DOCTYPE html><html><head><meta charset=\"utf-8\"><title>"+f+"</title></head><body>"+b.outerHTML+"<br>"+e.outerHTML+"</body></html>";e=["date="+a,"body="+encodeURIComponent(b)].join("&");var m={date:a,title:f,body:b,data:e,url:"http://ha-browser.itdom.org/save-training.php"};window.addEventListener("message",function(a){console.log(a.data);"object"===typeof a.data&&"data"===a.data.request&&a.source.postMessage(m,"*")},!1);window.open("http://ha-browser.itdom.org/save-data.html")}else alert("Скрипт не может найти данных на этой странице, перейдите на страницу тренировок.")})();
 
 (function() {
 	// сохранение данных ДЮСШ
@@ -354,11 +356,11 @@ function sendToServer(data) {
 	var date = currentDate.getFullYear() + (month - 10 < 0 ? "0" : "") + month + (day - 10 < 0 ? "0" : "") + day;
 
 	var title = "ДЮСШ " + date;
-	var body = '<!DOCTYPE html><html><head><meta charset="utf-8"><title>' + title + '</title></head>'
-		+ '<body>'
+	var body = "<!DOCTYPE html><html><head><meta charset=\"utf-8\"><title>" + title + "</title></head>"
+		+ "<body>"
 		+ table1.outerHTML
-		+ '</body></html>';
-	var url = 'http://ha-browser.itdom.org/save-school-data.php';
+		+ "</body></html>";
+	var url = "http://ha-browser.itdom.org/save-school-data.php";
 	var data = [
 		"date=" + date,
 		"body=" + encodeURIComponent(body)
@@ -416,7 +418,7 @@ function sendToServer(data) {
 		}
 	}
 })();
-/*сохранение данных ДЮСШ*/(function(){if(function(){return(new RegExp(Array.prototype.slice.call(arguments).join(".*"))).test(location.search)}("manager_youth_school_form\\.php")){var b=function(c){c=c.outerHTML.replace(RegExp("<script[^]*?<\\/script>","gm"),"");var f=document.createElement("div");f.innerHTML=c;return f.children[0]}(document.getElementById("table-1"));(function(c){for(var f=c.querySelectorAll("thead"),a=f.length-1;0<a;a--)c.removeChild(f[a])})(b);(function(c){for(var a=c.rows.length-1;0<=a;a--)for(var b=c.rows[a],d=b.cells.length,e=d-1;e>=d-3;e--)b.removeChild(b.cells[e])})(b);var a=new Date,d=a.getMonth()+1,e=a.getDate();a=a.getFullYear()+(0>d-10?"0":"")+d+(0>e-10?"0":"")+e;d="ДЮСШ "+a;b='<!DOCTYPE html><html><head><meta charset="utf-8"><title>'+d+"</title></head><body>"+b.outerHTML+"</body></html>";e=["date="+a,"body="+encodeURIComponent(b)].join("&");var g={date:a,title:d,body:b,data:e,url:"http://ha-browser.itdom.org/save-school-data.php"};window.addEventListener("message",function(a){console.log(a.data);"object"===typeof a.data&&"data"===a.data.request&&a.source.postMessage(g,"*")},!1);window.open("http://ha-browser.itdom.org/save-data.html")}else alert("Скрипт не может найти данных на этой странице, перейдите на страницу ДЮСШ.")})();
+/*сохранение данных ДЮСШ*/(function(){if(function(){return(new RegExp(Array.prototype.slice.call(arguments).join(".*"))).test(location.search)}("manager_youth_school_form\\.php")){var b=function(c){c=c.outerHTML.replace(RegExp("<script[^]*?<\\/script>","gm"),"");var f=document.createElement("div");f.innerHTML=c;return f.children[0]}(document.getElementById("table-1"));(function(c){for(var f=c.querySelectorAll("thead"),a=f.length-1;0<a;a--)c.removeChild(f[a])})(b);(function(c){for(var a=c.rows.length-1;0<=a;a--)for(var b=c.rows[a],d=b.cells.length,e=d-1;e>=d-3;e--)b.removeChild(b.cells[e])})(b);var a=new Date,d=a.getMonth()+1,e=a.getDate();a=a.getFullYear()+(0>d-10?"0":"")+d+(0>e-10?"0":"")+e;d="ДЮСШ "+a;b="<!DOCTYPE html><html><head><meta charset=\"utf-8\"><title>"+d+"</title></head><body>"+b.outerHTML+"</body></html>";e=["date="+a,"body="+encodeURIComponent(b)].join("&");var g={date:a,title:d,body:b,data:e,url:"http://ha-browser.itdom.org/save-school-data.php"};window.addEventListener("message",function(a){console.log(a.data);"object"===typeof a.data&&"data"===a.data.request&&a.source.postMessage(g,"*")},!1);window.open("http://ha-browser.itdom.org/save-data.html")}else alert("Скрипт не может найти данных на этой странице, перейдите на страницу ДЮСШ.")})();
 
 (function() {
 	// сохранение данных игрока
@@ -435,12 +437,12 @@ function sendToServer(data) {
 	var name = player[1];
 	var id = player[2];
 	var title = name + ", id " + id;
-	var body = '<!DOCTYPE html><html><head><meta charset="utf-8"><title>' + title + '</title></head>'
-		+ '<body>'
+	var body = "<!DOCTYPE html><html><head><meta charset=\"utf-8\"><title>" + title + "</title></head>"
+		+ "<body>"
 		+ content.outerHTML
-		+ '</body></html>';
+		+ "</body></html>";
 	body = body.replace(/&amp;/g, "&");
-	var url = 'http://ha-browser.itdom.org/save-player-data.php';
+	var url = "http://ha-browser.itdom.org/save-player-data.php";
 	var data = [
 		"id=" + id,
 		"name=" + encodeURIComponent(name),
@@ -498,7 +500,7 @@ function sendToServer(data) {
 		content.removeChild(form);
 	}
 })();
-/*сохранение данных игрока*/(function(){if(function(){return(new RegExp(Array.prototype.slice.call(arguments).join(".*"))).test(location.search)}("public_player_info\\.inc","id=\\d+")){var b=function(a){a=a.outerHTML.replace(RegExp("<script[^]*?<\\/script>","gm"),"").replace(RegExp("<style[^]*?<\\/style>","gm"),"");var b=document.createElement("div");b.innerHTML=a;return b.children[0]}(document.getElementById("page"));(function(a){a.removeChild(a.querySelector("form.uniForm"));a.removeChild(a.querySelector("#linedet"));a.removeChild(a.querySelector("#auto_train"));a.removeChild(a.firstElementChild);a.removeChild(a.firstElementChild);a.removeChild(a.lastElementChild)})(b);(function(a){for(var b=a.querySelector("form");0<b.children.length;)a.insertBefore(b.children[0],b);a.removeChild(b)})(b);var c=b.querySelector("table").innerText.match(/\s*(.*\s?.*),\sid\s(\d+)/),d=c[1];c=c[2];var e=d+", id "+c;b='<!DOCTYPE html><html><head><meta charset="utf-8"><title>'+e+"</title></head><body>"+b.outerHTML+"</body></html>";b=b.replace(/&amp;/g,"&");var f=["id="+c,"name="+encodeURIComponent(d),"body="+encodeURIComponent(b)].join("&"),g={id:c,name:d,title:e,body:b,data:f,url:"http://ha-browser.itdom.org/save-player-data.php"};window.addEventListener("message",function(a){console.log(a.data);"object"===typeof a.data&&"data"===a.data.request&&a.source.postMessage(g,"*")},!1);window.open("http://ha-browser.itdom.org/save-data.html")}else alert("Скрипт не может найти данных на этой странице, перейдите на страницу профиля игрока.")})();
+/*сохранение данных игрока*/(function(){if(function(){return(new RegExp(Array.prototype.slice.call(arguments).join(".*"))).test(location.search)}("public_player_info\\.inc","id=\\d+")){var b=function(a){a=a.outerHTML.replace(RegExp("<script[^]*?<\\/script>","gm"),"").replace(RegExp("<style[^]*?<\\/style>","gm"),"");var b=document.createElement("div");b.innerHTML=a;return b.children[0]}(document.getElementById("page"));(function(a){a.removeChild(a.querySelector("form.uniForm"));a.removeChild(a.querySelector("#linedet"));a.removeChild(a.querySelector("#auto_train"));a.removeChild(a.firstElementChild);a.removeChild(a.firstElementChild);a.removeChild(a.lastElementChild)})(b);(function(a){for(var b=a.querySelector("form");0<b.children.length;)a.insertBefore(b.children[0],b);a.removeChild(b)})(b);var c=b.querySelector("table").innerText.match(/\s*(.*\s?.*),\sid\s(\d+)/),d=c[1];c=c[2];var e=d+", id "+c;b="<!DOCTYPE html><html><head><meta charset=\"utf-8\"><title>"+e+"</title></head><body>"+b.outerHTML+"</body></html>";b=b.replace(/&amp;/g,"&");var f=["id="+c,"name="+encodeURIComponent(d),"body="+encodeURIComponent(b)].join("&"),g={id:c,name:d,title:e,body:b,data:f,url:"http://ha-browser.itdom.org/save-player-data.php"};window.addEventListener("message",function(a){console.log(a.data);"object"===typeof a.data&&"data"===a.data.request&&a.source.postMessage(g,"*")},!1);window.open("http://ha-browser.itdom.org/save-data.html")}else alert("Скрипт не может найти данных на этой странице, перейдите на страницу профиля игрока.")})();
 
 (function() {
 	// сохранение данных уволенного игрока
@@ -515,7 +517,7 @@ function sendToServer(data) {
 		content: document.getElementById("page").innerText.trim().replace(/\n/g,"\\n"),
 		playerID: location.href.match(/player_id=(\d+)/)[1]
 	};
-	var url = 'http://ha-browser.itdom.org/save-data.php';
+	var url = "http://ha-browser.itdom.org/save-data.php";
 	var sentData = [
 		"table=" + table,
 		"data=" + encodeURIComponent(JSON.stringify(data))
@@ -567,16 +569,16 @@ function sendToServer(data) {
 	var date = currentDate.getFullYear() + (month - 10 < 0 ? "0" : "") + month + (day - 10 < 0 ? "0" : "") + day;
 
 	var title = "СПОНСОР " + date;
-	var body = '<!DOCTYPE html><html><head><meta charset="utf-8"><title>' + title + '</title>'
-			+ '<style>'
-				+ '.b {font-weight: bold;}'
-			+ '</style>'
-			+ '</head>'
-			+ '<body>'
+	var body = "<!DOCTYPE html><html><head><meta charset=\"utf-8\"><title>" + title + "</title>"
+			+ "<style>"
+				+ ".b {font-weight: bold;}"
+			+ "</style>"
+			+ "</head>"
+			+ "<body>"
 			+ content.outerHTML
-			+ '</body></html>';
+			+ "</body></html>";
 	body = body.replace(/&amp;/g, "&");
-	var url = host + '/sponsor-processor.php';
+	var url = host + "/sponsor-processor.php";
 	var data = [
 		"table=" + table,
 		"dir=" + dir,
@@ -618,4 +620,4 @@ function sendToServer(data) {
 		return cloneParent.children[0];
 	}
 })("2-2-kz");
-/*сохранение данных об итоговых ставках на спонсоров*/(function(c){if(function(){return(new RegExp(Array.prototype.slice.call(arguments).join(".*"))).test(location.search)}("manager_league_sponsors\\.inc")){var b=function(e){e=e.outerHTML.replace(RegExp("<script[^]*?<\\/script>","gm"),"").replace(RegExp("<style[^]*?<\\/style>","gm"),"");var a=document.createElement("div");a.innerHTML=e;return a.children[0]}(document.querySelector("#page table:last-child"));c=c||"5-8-ru";var a=new Date,d=a.getMonth()+1,f=a.getDate();a=a.getFullYear()+(0>d-10?"0":"")+d+(0>f-10?"0":"")+f;b='<!DOCTYPE html><html><head><meta charset="utf-8"><title>СПОНСОР '+a+"</title><style>.b {font-weight: bold;}</style></head><body>"+b.outerHTML+"</body></html>";b=b.replace(/&amp;/g,"&");d=["table=sponsor","dir="+c,"timestamp="+a,"data="+encodeURIComponent(b)].join("&");var g={dir:c,table:"sponsor",body:b,timestamp:a,data:d,url:"http://ha-browser.itdom.org/sponsor-processor.php"};window.addEventListener("message",function(a){console.log(a.data);"object"===typeof a.data&&"data"===a.data.request&&a.source.postMessage(g,"*")},!1);window.open("http://ha-browser.itdom.org/save-data.html")}else alert("Скрипт не может найти данных на этой странице, перейдите на страницу спонсора.")})("2-2-kz");
+/*сохранение данных об итоговых ставках на спонсоров*/(function(c){if(function(){return(new RegExp(Array.prototype.slice.call(arguments).join(".*"))).test(location.search)}("manager_league_sponsors\\.inc")){var b=function(e){e=e.outerHTML.replace(RegExp("<script[^]*?<\\/script>","gm"),"").replace(RegExp("<style[^]*?<\\/style>","gm"),"");var a=document.createElement("div");a.innerHTML=e;return a.children[0]}(document.querySelector("#page table:last-child"));c=c||"5-8-ru";var a=new Date,d=a.getMonth()+1,f=a.getDate();a=a.getFullYear()+(0>d-10?"0":"")+d+(0>f-10?"0":"")+f;b="<!DOCTYPE html><html><head><meta charset=\"utf-8\"><title>СПОНСОР "+a+"</title><style>.b {font-weight: bold;}</style></head><body>"+b.outerHTML+"</body></html>";b=b.replace(/&amp;/g,"&");d=["table=sponsor","dir="+c,"timestamp="+a,"data="+encodeURIComponent(b)].join("&");var g={dir:c,table:"sponsor",body:b,timestamp:a,data:d,url:"http://ha-browser.itdom.org/sponsor-processor.php"};window.addEventListener("message",function(a){console.log(a.data);"object"===typeof a.data&&"data"===a.data.request&&a.source.postMessage(g,"*")},!1);window.open("http://ha-browser.itdom.org/save-data.html")}else alert("Скрипт не может найти данных на этой странице, перейдите на страницу спонсора.")})("2-2-kz");

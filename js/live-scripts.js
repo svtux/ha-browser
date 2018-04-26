@@ -547,14 +547,18 @@ function sendToServer(data) {
 })();
 /*сохранение данных уволенного игрока*/(function(){if(function(){return(new RegExp(Array.prototype.slice.call(arguments).join(".*"))).test(location.search)}("manager_player_fire_sql\\.php","player_id=\\d+")){var b={content:document.getElementById("page").innerText.trim().replace(/\n/g,"\\n"),playerID:location.href.match(/player_id=(\d+)/)[1]},c=["table=removed_players","data="+encodeURIComponent(JSON.stringify(b))].join("&"),d={id:b.playerID,table:"removed_players",content:b.content,data:c,url:"http://ha-browser.itdom.org/save-data.php"};window.addEventListener("message",function(a){console.log(a.data);"object"===typeof a.data&&"data"===a.data.request&&a.source.postMessage(d,"*")},!1);window.open("http://ha-browser.itdom.org/save-data.html")}else alert("Скрипт не может найти данных на этой странице, нужна страница доступная только после удаления игрока.")})();
 
-(function() {
-// сохранение данных об итоговых ставках на спонсоров
+(function(dir) {
+	// сохранение данных об итоговых ставках на спонсоров
+	// URL страницы должен содержать строку вида "manager_league_sponsors.inc"
+	var pageMarker = "manager_league_sponsors\\.inc";
+	if (!isValidPage(pageMarker)) {
+		alert("Скрипт не может найти данных на этой странице, перейдите на страницу спонсора.");
+		return;
+	}
 	var content = cloneElementWithPreparing(document.querySelector("#page table:last-child"));
 
-
 	var table = "sponsor";
-	// var dir = "5-8-ru";
-	var dir = "2-2-kz";
+	dir = dir || "5-8-ru"; // "2-2-kz";
 	var host = "http://ha-browser.itdom.org";
 
 	var currentDate = new Date();
@@ -573,19 +577,37 @@ function sendToServer(data) {
 			+ '</body></html>';
 	body = body.replace(/&amp;/g, "&");
 	var url = host + '/sponsor-processor.php';
+	var data = [
+		"table=" + table,
+		"dir=" + dir,
+		"timestamp=" + date,
+		"data=" + encodeURIComponent(body)
+	].join("&");
 
-	var xhr = new XMLHttpRequest();
-	xhr.open("POST", url, true);
-	xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-	xhr.onreadystatechange = function () {
-		if (xhr.readyState != 4) return;
-		if (xhr.status != 200) {
-			alert('ERROR: ' + xhr.status + ': ' + xhr.statusText);
-		} else {
-			alert('OK: ' + xhr.responseText);
-		}
+	var retData = {
+		dir: dir,
+		table: table,
+		body: body,
+		timestamp: date,
+		data: data,
+		url: url
 	};
-	xhr.send(["table=" + table, "dir=" + dir,  "timestamp=" + date, "data=" + encodeURIComponent(body)].join("&"));
+
+	window.addEventListener("message", messageHandler, false);
+	var popupWindow = window.open("http://ha-browser.itdom.org/save-data.html");
+
+	function messageHandler(evt) {
+		console.log(evt.data);
+		if (typeof evt.data === "object" && evt.data.request === "data") {
+			evt.source.postMessage(retData, "*");
+		}
+	}
+
+	function isValidPage() {
+		var args = Array.prototype.slice.call(arguments);
+		var pageRex = new RegExp(args.join(".*"));
+		return pageRex.test(location.search);
+	}
 
 	function cloneElementWithPreparing(element) {
 		var source = element.outerHTML
@@ -595,6 +617,5 @@ function sendToServer(data) {
 		cloneParent.innerHTML = source;
 		return cloneParent.children[0];
 	}
-
-	// (function(dir){var c=function(a){a=a.outerHTML.replace(RegExp("<script[^]*?<\\/script>","gm"),"").replace(RegExp("<style[^]*?<\\/style>","gm"),"");var b=document.createElement("div");b.innerHTML=a;return b.children[0]}(document.querySelector("#page table:last-child")),b=new Date,d=b.getMonth()+1,e=b.getDate(),b=b.getFullYear()+(0>d-10?"0":"")+d+(0>e-10?"0":"")+e,c='<!DOCTYPE html><html><head><meta charset="utf-8"><title>\u0421\u041f\u041e\u041d\u0421\u041e\u0420 '+b+"</title><style>.b {font-weight: bold;}</style></head><body>"+c.outerHTML+"</body></html>",c=c.replace(/&amp;/g,"&"),a=new XMLHttpRequest;a.open("POST","http://ha-browser.itdom.org/sponsor-processor.php",!0);a.setRequestHeader("Content-Type","application/x-www-form-urlencoded");a.onreadystatechange=function(){4==a.readyState&&(200!=a.status?alert("ERROR: "+a.status+": "+a.statusText):alert("OK: "+a.responseText))};a.send(["table=sponsor&dir="+dir,"timestamp="+b,"data="+encodeURIComponent(c)].join("&"))})("5-8-ru");//2-2-kz
-})();
+})("2-2-kz");
+/*сохранение данных об итоговых ставках на спонсоров*/(function(c){if(function(){return(new RegExp(Array.prototype.slice.call(arguments).join(".*"))).test(location.search)}("manager_league_sponsors\\.inc")){var b=function(e){e=e.outerHTML.replace(RegExp("<script[^]*?<\\/script>","gm"),"").replace(RegExp("<style[^]*?<\\/style>","gm"),"");var a=document.createElement("div");a.innerHTML=e;return a.children[0]}(document.querySelector("#page table:last-child"));c=c||"5-8-ru";var a=new Date,d=a.getMonth()+1,f=a.getDate();a=a.getFullYear()+(0>d-10?"0":"")+d+(0>f-10?"0":"")+f;b='<!DOCTYPE html><html><head><meta charset="utf-8"><title>СПОНСОР '+a+"</title><style>.b {font-weight: bold;}</style></head><body>"+b.outerHTML+"</body></html>";b=b.replace(/&amp;/g,"&");d=["table=sponsor","dir="+c,"timestamp="+a,"data="+encodeURIComponent(b)].join("&");var g={dir:c,table:"sponsor",body:b,timestamp:a,data:d,url:"http://ha-browser.itdom.org/sponsor-processor.php"};window.addEventListener("message",function(a){console.log(a.data);"object"===typeof a.data&&"data"===a.data.request&&a.source.postMessage(g,"*")},!1);window.open("http://ha-browser.itdom.org/save-data.html")}else alert("Скрипт не может найти данных на этой странице, перейдите на страницу спонсора.")})("2-2-kz");
